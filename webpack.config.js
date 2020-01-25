@@ -2,11 +2,18 @@ const path = require('path');
 const html = require('html-webpack-plugin');
 
 module.exports = {
+    mode: process.env.NODE_ENV,
+
     entry: "./client/index.js",
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "bundle.js"
     },
+
+    // plugins: [new html({
+    //     template: './client/index.html'
+    // })],
+
     module: {
         rules: [
             {
@@ -22,12 +29,11 @@ module.exports = {
         ]
     },
     devServer: {
-        publicPath: "/build/",
+        publicPath: '/dist/',
         proxy: {
-            "/": "https://localhost:3000"
+        "/": "http://localhost:3000"
         }
     },
-    mode: process.env.node_env
 }
 
 

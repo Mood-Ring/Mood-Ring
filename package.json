@@ -5,9 +5,10 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --env.node_env=production --open",
-    "dev": "webpack-dev-server --env.node_env=development --open | nodemon server.js",
-    "start": "nodemon server.js"
+    "build": "NODE_ENV=production webpack  --open",
+    "dev": "NODE_ENV=development webpack-dev-server  --open --hot & node server/server.js",
+    "start": "node server/server.js",
+    "prestart": "npm run build"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "@babel/core": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
+    "babel": "^6.23.0",
     "babel-loader": "^8.0.6",
     "html-webpack-plugin": "^3.2.0",
     "nodemon": "^2.0.2",
