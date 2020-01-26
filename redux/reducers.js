@@ -7,8 +7,8 @@ const initialState = {
   username: '',
   password: '',
   //pages: action.payload will bring over an index that we can use to pull the page they want
-  page: 'Home', 
-  pages: ['Home', 'Login', 'UserFeed']
+  page: 'Home',
+  pages: ['Home', 'Login', 'UserFeed', 'Create']
 };
 
 const userReducers = (state = initialState, action) => {
@@ -35,7 +35,7 @@ const userReducers = (state = initialState, action) => {
         username: state.username,
         password: state.password
       };
-      //Might just have to send post to db 
+      //Might just have to send post to db
       return {
         ...state,
         userList: state.userList.concat(newUser),
