@@ -22,7 +22,7 @@ const LogForm = styled.form`
     border: solid;
     width: 50%;
     height: 300px;
-    margin-left: 250px;
+    margin-left: 400px;
 `;
 
 //Submit button styling
@@ -47,7 +47,7 @@ class LogIn extends Component{
             <MainDiv>
                 <h1 style = {{textAlign: 'center'}}>Log In</h1>
                 <LogForm>
-                    <div style = {{marginLeft: '150px', marginTop: '70px'}}>
+                    <div style = {{marginLeft: '350px', marginTop: '70px'}}>
                         <label for = "username">Username: </label> 
                         <input id = "username" type = "text"></input>
                         <br></br>

@@ -4,8 +4,21 @@ import LandingPageBody from './components/LandingPageBody.jsx';
 import BottomLinks from './components/BottomLinks.jsx';
 import LogIn from './components/LogIn.jsx';
 import Feeling from './components/HowAreYouFeeling.jsx';
+import * as actions from '../redux/actions.js';
+import { connect } from 'react-redux';
 
-const page = "UserFeed";
+const page1 = "UserFeed";
+
+// const mapStateToProps = ({
+//     reduxState: {page},
+// }) => ({
+//     page
+// })
+
+
+const mapDispatchToProps = dispatch => ({
+
+});
 
 class App extends Component{
     constructor(props){
@@ -15,11 +28,11 @@ class App extends Component{
     render(){
         const display = [];
         display.push(<MainHeader/>);
-        switch(page){
+        switch(page1){
             case "Home": 
             display.push(<LandingPageBody/>);
             break;
-            case "LogIn": 
+            case "Login": 
             display.push(<LogIn/>);
             break;
             case "UserFeed":
@@ -35,4 +48,4 @@ class App extends Component{
     }
 }
 
-export default App;
+export default App/*connect(mapStateToProps, mapDispatchToProps)(App)*/;
