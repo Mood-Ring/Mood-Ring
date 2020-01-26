@@ -35,7 +35,7 @@ class App extends Component {
 
   componentDidMount() {
     //changePage(0) serves the homepage for the app
-    this.props.changePage(2);
+    this.props.changePage(0);
   }
 
   render() {

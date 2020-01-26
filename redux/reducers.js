@@ -35,6 +35,7 @@ const userReducers = (state = initialState, action) => {
         username: state.username,
         password: state.password
       };
+      console.log("user: ", newUser);
       //Might just have to send post to db
       return {
         ...state,
