@@ -9,6 +9,8 @@
 import React from 'react';
 import {Component} from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import * as actions from '../../redux/actions.js';
 
 //Styling for the whole header
 const MainDiv = styled.div`
@@ -37,19 +39,55 @@ const LoginButton = styled.button`
     }
 `;
 
+const mapStateToProps = (reduxState) => {
+    //used to bring in the pieces of state that the components on this page will use
+    return {
+      page: reduxState.page
+    };
+  };
+  
+  const mapDispatchToProps = (dispatch) => {
+    //used to bring in actions that will be dispatched within the components on this page.
+    //   syncMarkets: () => dispatch(actions.syncMarkets())
+    return {
+      changePage: (index) => {
+        dispatch(actions.changePage(index));
+      }
+    };
+  };
+
+
 class MainHeader extends Component{
     constructor(props){
         super(props);
+
+        this.gotToLogin = this.gotToLogin.bind(this);
+        this.gotToCreate = this.gotToCreate.bind(this);
+    }
+
+    gotToLogin(){
+        this.props.changePage(1);
+    }
+
+    gotToCreate(){
+        this.props.changePage(3);
     }
 
     render(){
+        console.log("Page in header:", this.props.page);
+        const headerArray = [];
+        headerArray.push(<TitleText>Mood-Ring</TitleText>);
+        if(this.props.page != 'UserFeed'){
+            if(this.props.page != 'Login') headerArray.push(<LoginButton href = "" onClick = {this.gotToLogin}>Log In</LoginButton>);
+            if(this.props.page != 'Create') headerArray.push(<LoginButton href = "" onClick = {this.gotToCreate}>Sign Up</LoginButton>);
+        }
+
         return(
             <MainDiv>
-                <TitleText>Mood-Ring</TitleText>
-                <LoginButton href = "">Log In</LoginButton>
+                {headerArray}
             </MainDiv>
         )
     }
 }
 
-export default MainHeader;
+export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);
