@@ -1,6 +1,7 @@
 /***************************\
 *                           *
-*  Log In: The Log in Page! *
+*  Create User: Page to     *
+*  create a new account     *
 *                           *
 \***************************/
 
@@ -17,8 +18,8 @@ const MainDiv = styled.div`
 
 `;
 
-//The log in form styling
-const LogForm = styled.form`
+//The sign up form styling
+const CreateForm = styled.form`
     border: solid;
     width: 50%;
     height: 300px;
@@ -27,7 +28,7 @@ const LogForm = styled.form`
 
 //Submit button styling
 const SubmitBitton = styled.button`
-    margin-left: 70px;
+    margin-left: 350px;
     text-decoration: none;
     border-radius: 20px;
     color: black;
@@ -37,7 +38,7 @@ const SubmitBitton = styled.button`
     }
 `;
 
-class LogIn extends Component{
+class CreateUser extends Component{
     constructor(props){
         super(props);
     }
@@ -45,9 +46,9 @@ class LogIn extends Component{
     render(){
         return(
             <MainDiv>
-                <h1 style = {{textAlign: 'center'}}>Log In</h1>
-                <LogForm>
-                    <div style = {{marginLeft: '350px', marginTop: '70px'}}>
+                <h1 style = {{textAlign: 'center'}}>Sign Up</h1>
+                <CreateForm>
+                    <div style = {{marginLeft: '310px', marginTop: '70px'}}>
                         <label for = "username">Username: </label> 
                         <input id = "username" type = "text"></input>
                         <br></br>
@@ -56,14 +57,14 @@ class LogIn extends Component{
                         <input id = "password" type = "text"></input>
                         <br></br>
                         <br></br>
-                        <SubmitBitton>Submit</SubmitBitton>
                     </div>
+                    <SubmitBitton>Create Account</SubmitBitton>
                     <hr></hr>
                     <h1>OAuth goes here</h1>
-                </LogForm>
+                </CreateForm>
             </MainDiv>
         )
     }
 }
 
-export default LogIn;
+export default CreateUser;

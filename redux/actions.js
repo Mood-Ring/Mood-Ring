@@ -16,7 +16,7 @@ export const setPassword = (password) => ({
 
 export const addUser = () => ({
   //ADD_USER will be triggered after both a new username and password have been stored in state. It won't take a payload as it will be triggered as soon
-
+  //as those two values have been added to state
   type: types.ADD_USER
 });
 

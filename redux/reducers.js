@@ -1,6 +1,5 @@
 import * as types from './actionTypes.js';
 
-const pages = ['Home', 'Login', 'UserFeed'];
 const initialState = {
   //userList will be an array that holds user objects
   userList: [],
@@ -8,7 +7,8 @@ const initialState = {
   username: '',
   password: '',
   //pages: action.payload will bring over an index that we can use to pull the page they want
-  page: 'Home'
+  page: 'Home',
+  pages: ['Home', 'Login', 'UserFeed', 'Create']
 };
 
 const userReducers = (state = initialState, action) => {
@@ -35,6 +35,7 @@ const userReducers = (state = initialState, action) => {
         username: state.username,
         password: state.password
       };
+      //Might just have to send post to db
       return {
         ...state,
         userList: state.userList.concat(newUser),
@@ -44,10 +45,12 @@ const userReducers = (state = initialState, action) => {
 
     case types.CHANGE_PAGE:
       // receives an index via action.payload and returns the page the user has requested to see by pulling the path at that specific index.
-      const newPage = pages[action.payload];
+      //const newPage = state.pages[action.payload];
       return {
         ...state,
-        page: newPage
+        page: state.pages[action.payload]
       };
   }
 };
+
+export default userReducers;
