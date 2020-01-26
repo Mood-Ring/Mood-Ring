@@ -5,7 +5,7 @@ import BottomLinks from './components/BottomLinks.jsx';
 import LogIn from './components/LogIn.jsx';
 import Feeling from './components/HowAreYouFeeling.jsx';
 
-const page = "UserFeed";
+const page = "LogIn";
 
 class App extends Component{
     constructor(props){
