@@ -9,6 +9,7 @@ import * as actions from '../redux/actions.js';
 import { connect } from 'react-redux';
 
 const page1 = 'Create';
+//adding new comment for testing
 
 const mapStateToProps = (reduxState) => {
   //used to bring in the pieces of state that the components on this page will use
@@ -55,11 +56,7 @@ class App extends Component {
         break;
     }
     display.push(<BottomLinks />);
-    return(
-    <div>
-        {display}
-    </div>
-    );
+    return <div>{display}</div>;
   }
 }
 
