@@ -4,10 +4,11 @@ import LandingPageBody from './components/LandingPageBody.jsx';
 import BottomLinks from './components/BottomLinks.jsx';
 import LogIn from './components/LogIn.jsx';
 import Feeling from './components/HowAreYouFeeling.jsx';
+import CreateUser from './components/CreateUser.jsx';
 import * as actions from '../redux/actions.js';
 import { connect } from 'react-redux';
 
-const page1 = 'UserFeed';
+const page1 = 'Create';
 
 const mapStateToProps = (reduxState) => {
   //used to bring in the pieces of state that the components on this page will use
@@ -40,9 +41,11 @@ class App extends Component {
     const display = [];
     display.push(<MainHeader />);
     switch (this.props.page) {
-      //this.props.page loads the homepage
       case 'Home':
         display.push(<LandingPageBody />);
+        break;
+      case 'Create':
+        display.push(<CreateUser />);
         break;
       case 'Login':
         display.push(<LogIn />);
