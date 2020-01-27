@@ -116,7 +116,7 @@ class CreateUser extends Component{
                         <br></br>
                         <br></br>
                         <label for = "password">Password: </label> 
-                        <input id = "password" type = "text" onChange = {this.onPasswordChange}></input>
+                        <input id = "password" type = "password" onChange = {this.onPasswordChange}></input>
                         <br></br>
                         <br></br>
                     </div>
