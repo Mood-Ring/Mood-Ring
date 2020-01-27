@@ -10,6 +10,8 @@
 import React from 'react';
 import { Component } from 'react';
 import styled  from 'styled-components';
+import { connect } from 'react-redux';
+import * as actions from '../../redux/actions.js';
 
 //Styling for the whole body 
 const MainDiv = styled.div`
@@ -41,6 +43,19 @@ const LoginButton = styled.button`
     }
 `;
 
+const mapStateToProps = (reduxState) => {
+
+  };
+  
+  const mapDispatchToProps = (dispatch) => {
+    //used to bring in actions that will be dispatched within the components on this page.
+    return {
+      changePage: (index) => {
+        dispatch(actions.changePage(index));
+      }
+    };
+  };
+
 class LandingPageBody extends Component{
     constructor(props){
         super(props);
@@ -49,6 +64,8 @@ class LandingPageBody extends Component{
             quote: '', 
             author: ''
          }
+
+         this.goToSignUp = this.goToSignUp.bind(this);
     }
 
 
@@ -73,6 +90,10 @@ class LandingPageBody extends Component{
         })
     }
 
+    goToSignUp(){
+        this.props.changePage(3);
+    }
+
     render(){
     //Variable for dynamic quote fetching
     const quoteComp = <Quote>"{this.state.quote}" - {this.state.author}</Quote>
@@ -81,10 +102,10 @@ class LandingPageBody extends Component{
             <MainDiv>
                 {quoteComp}
                 <br></br>
-                <LoginButton>Start Today</LoginButton>
+                <LoginButton onClick = {this.goToSignUp}>Start Today</LoginButton>
             </MainDiv>
         )
     }
 }
 
-export default LandingPageBody;
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPageBody);

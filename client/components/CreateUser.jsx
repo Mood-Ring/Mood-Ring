@@ -121,8 +121,6 @@ class CreateUser extends Component{
                         <br></br>
                     </div>
                     <SubmitBitton onClick = {this.onFormClick}>Create Account</SubmitBitton>
-                    <hr></hr>
-                    <h1>OAuth goes here</h1>
                 </CreateForm>
             </MainDiv>
         )
