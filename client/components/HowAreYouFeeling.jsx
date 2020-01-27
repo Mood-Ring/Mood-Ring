@@ -13,22 +13,20 @@ import { connect } from 'react-redux';
 
 //The main body styling
 const MainDiv = styled.div`
-  font-family: 'Assistant', sans-serif;
   width: 100%;
   height: 300px;
+  border: solid;
   margin-top: 10px;
   text-align: center;
 `;
 
 const SelectStyle = styled.select`
-  font-family: 'Assistant', sans-serif;
   height: 100px;
   width: 200px;
   font-size: 30px;
 `;
 
 const SubmitBitton = styled.button`
-  font-family: 'Assistant', sans-serif;
   margin-top: 20px;
   text-decoration: none;
   border-radius: 20px;
@@ -100,4 +98,6 @@ class Feeling extends Component {
     );
   }
 }
+
+
 export default connect(mapStateToProps, null)(Feeling);;

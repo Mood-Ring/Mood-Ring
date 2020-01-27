@@ -10,35 +10,33 @@ import styled  from 'styled-components';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions.js';
 
-//The main body styling
+//The main body styling 
 const MainDiv = styled.div`
-  text-align: center;
-  width: 80%;
-  height: 600px;
-  margin-top: 10px;
-  font-family: 'Assistant', sans-serif;
+    width: 100%;
+    height: 500px;
+    border: solid;
+    margin-top: 10px;
+
 `;
 
 //The log in form styling
 const LogForm = styled.form`
-  text-align: right;
-  width: 100%;
-  height: 300px;
-  margin: auto;
-  font-family: 'Assistant', sans-serif;
+    border: solid;
+    width: 50%;
+    height: 300px;
+    margin-left: 400px;
 `;
 
 //Submit button styling
 const SubmitBitton = styled.button`
-  margin: auto;
-  text-decoration: none;
-  border-radius: 20px;
-  color: white;
-  opacity: 0.6%
-  font-size: 20px;
-  &:focus {
-    outline: none;
-  }
+    margin-left: 70px;
+    text-decoration: none;
+    border-radius: 20px;
+    color: black;
+    font-size: 20px;
+    &:focus{
+        outline: none;
+    }
 `;
 
 const WrongMessage = styled.p`
@@ -152,4 +150,3 @@ class LogIn extends Component{
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn);
-
