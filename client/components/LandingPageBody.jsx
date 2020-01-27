@@ -6,40 +6,40 @@
 *                           *
 \***************************/
 
-
 import React from 'react';
 import { Component } from 'react';
-import styled  from 'styled-components';
+import styled from 'styled-components';
 
-//Styling for the whole body 
+//Styling for the whole body
 const MainDiv = styled.div`
-    width: 100%;
-    height: 600px;
-    border-style: solid;
-    font-family: georgia;
-    text-align: center;
-    margin-top: 10px;
+  width: 100%;
+  height: 600px;
+  font-family: 'Assistant', sans-serif;
+  text-align: center;
+  margin-top: 10px;
 `;
 
 //Styling for the daily quote
 const Quote = styled.h1`
-    font-style: italic;
-    margin-top: 80px;
+  font-style: italic;
+  font-family: 'Assistant', sans-serif;
+  margin-top: 80px;
 `;
 
 //Styling for the log in button
 const LoginButton = styled.button`
-    text-decoration: none;
-    border-radius: 70px;
-    color: black;
-    font-size: 20px;
-    margin: 3px;
-    width: 400px;
-    height: 200px;
-    &:focus{
-        outline: none;
-    }
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  border-radius: 10px
+  margin: 3px;
+  width: 18%;
+  height: 7%;
+  &:focus {
+    outline: none;
+  }
 `;
+
 
 class LandingPageBody extends Component{
     constructor(props){
@@ -73,18 +73,18 @@ class LandingPageBody extends Component{
         })
     }
 
-    render(){
+  render() {
     //Variable for dynamic quote fetching
     const quoteComp = <Quote>"{this.state.quote}" - {this.state.author}</Quote>
 
-        return(
-            <MainDiv>
-                {quoteComp}
-                <br></br>
-                <LoginButton>Start Today</LoginButton>
-            </MainDiv>
-        )
-    }
+    return (
+      <MainDiv>
+        {quoteComp}
+        <br></br>
+        <LoginButton className="login-buttons">Start Today</LoginButton>
+      </MainDiv>
+    );
+  }
 }
 
 export default LandingPageBody;
