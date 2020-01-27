@@ -48,8 +48,9 @@ const mapStateToProps = (reduxState) => {
     currentUser: reduxState.currentUser
   };
 
-  
-  const mapDispatchToProps = (dispatch) => {
+};
+
+const mapDispatchToProps = (dispatch) => {
     //used to bring in actions that will be dispatched within the components on this page.
     return {
       setUsername: (userN) => {
@@ -65,7 +66,6 @@ const mapStateToProps = (reduxState) => {
         dispatch(actions.changePage(index));
       }
     };
-  };
 };
 
 class CreateUser extends Component {
@@ -102,7 +102,7 @@ class CreateUser extends Component {
             body: JSON.stringify(user)
         }); 
         this.props.changePage(2);
-
+    }
   render() {
     return (
       <MainDiv>
