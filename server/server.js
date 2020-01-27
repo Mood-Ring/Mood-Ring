@@ -39,7 +39,7 @@ app.post('/login', userController.login, (req, res) => {
     res.status(200).send(res.locals.user)
 })
 
-app.get('/mood', userController.moodResponse, (req, res) => {
+app.post('/mood', userController.moodResponse, (req, res) => {
   //  console.log('in res', res.locals.user)
     res.status(200).send(res.locals.moodresponse);
 })
