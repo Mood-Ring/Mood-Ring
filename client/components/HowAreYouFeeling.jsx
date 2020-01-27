@@ -50,11 +50,10 @@ class Feeling extends Component {
   }
 
   render() {
-
-    console.log("Current user:", this.props.currentUser);
+    const cur = this.props.currentUser;
     return (
       <MainDiv>
-        <h1>How are you feeling today {this.props.currentUser}?</h1>
+        <h1>How are you feeling today {cur}?</h1>
         <SelectStyle>
           <option value="Happy">Happy</option>
           <option value="Sad">Sad</option>
