@@ -108,7 +108,7 @@ class LogIn extends Component{
               })
             .then((response) => response.json())
             .then((res) =>{
-             if(res.username == "User name or password is wrong"){
+             if(res.username == "Username or password is wrong"){
                  this.setState({
                      wrong: true
                  });

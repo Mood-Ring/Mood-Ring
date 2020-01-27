@@ -41,7 +41,7 @@ app.post('/login', userController.login, (req, res) => {
 
 app.post('/mood', userController.moodResponse, (req, res) => {
   //  console.log('in res', res.locals.user)
-    res.status(200).send(res.locals.moodresponse);
+    res.status(200).send({response: res.locals.moodresponse});
 })
 
 app.use((err, req, res, next) => {

@@ -71,7 +71,7 @@ userController.login = (req, res, next) => {
           if(!result)
            {
             console.log("User name or password is wronng", bcerr);
-            res.send("User name or password is wrong");
+            res.send({username: "User name or password is wrong"});
             
            } else 
            {
