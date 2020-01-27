@@ -43,7 +43,10 @@ const LoginButton = styled.button`
 `;
 
 const mapStateToProps = (reduxState) => {
-
+    //used to bring in the pieces of state that the components on this page will use
+    return {
+      page: reduxState.page
+    };
   };
   
   const mapDispatchToProps = (dispatch) => {
