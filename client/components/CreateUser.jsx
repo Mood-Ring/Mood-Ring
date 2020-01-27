@@ -51,7 +51,6 @@ const mapStateToProps = (reduxState) => {
   
   const mapDispatchToProps = (dispatch) => {
     //used to bring in actions that will be dispatched within the components on this page.
-    //   syncMarkets: () => dispatch(actions.syncMarkets())
     return {
       setUsername: (userN) => {
         dispatch(actions.setUsername(userN));
@@ -61,6 +60,9 @@ const mapStateToProps = (reduxState) => {
       }, 
       addUser: () => {
         dispatch(actions.addUser());
+      }, 
+      changePage: (index) => {
+        dispatch(actions.changePage(index));
       }
     };
   };
@@ -98,7 +100,8 @@ class CreateUser extends Component{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(user)
-        })
+        }); 
+        this.props.changePage(2);
 
     }
 
@@ -126,4 +129,4 @@ class CreateUser extends Component{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);;
+export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);

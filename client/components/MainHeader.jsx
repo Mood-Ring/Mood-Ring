@@ -21,22 +21,28 @@ const MainDiv = styled.div`
 `;
 
 //Styling for the 'Mood-Ring' title
-const TitleText = styled.p`
-  margin: 2px;
-  font-weight: bold;
-  font-size: 30px;
+const TitleText = styled.button`
+    border: none;
+    display: block;
+    margin-left: 45%;
+    font-weight: bold;
+    font-size: 30px;
+    &:focus{
+        outline: none;
+    }
 `;
 
 //Styling for the Log In button
 const LoginButton = styled.button`
-  text-decoration: none;
-  border-radius: 20px;
-  color: black;
-  font-size: 20px;
-  margin: 3px;
-  &:focus {
-    outline: none;
-  }
+    clear: left;
+    text-decoration: none;
+    border-radius: 20px;
+    color: black;
+    font-size: 20px;
+    margin: 3px;
+    &:focus{
+        outline: none;
+    }
 `;
 
 const mapStateToProps = (reduxState) => {
@@ -61,6 +67,7 @@ class MainHeader extends Component {
 
     this.gotToLogin = this.gotToLogin.bind(this);
     this.gotToCreate = this.gotToCreate.bind(this);
+    this.gotToMain = this.gotToMain.bind(this);
   }
 
   gotToLogin() {
@@ -71,27 +78,24 @@ class MainHeader extends Component {
     this.props.changePage(3);
   }
 
-  render() {
-    console.log('Page in header:', this.props.page);
-    const headerArray = [];
-    headerArray.push(<TitleText>Mood-Ring</TitleText>);
-    if (this.props.page != 'UserFeed') {
-      if (this.props.page != 'Login')
-        headerArray.push(
-          <LoginButton href="" onClick={this.gotToLogin}>
-            Log In
-          </LoginButton>
-        );
-      if (this.props.page != 'Create')
-        headerArray.push(
-          <LoginButton href="" onClick={this.gotToCreate}>
-            Sign Up
-          </LoginButton>
-        );
-    }
+  gotToMain(){
+    this.props.changePage(0);
+}
+    render(){
+        console.log("Page in header:", this.props.page);
+        const headerArray = [];
+        headerArray.push(<TitleText onClick = {this.gotToMain}>Mood-Ring</TitleText>);
+        if(this.props.page != 'UserFeed'){
+            if(this.props.page != 'Login') headerArray.push(<LoginButton href = "" onClick = {this.gotToLogin}>Log In</LoginButton>);
+            if(this.props.page != 'Create') headerArray.push(<LoginButton href = "" onClick = {this.gotToCreate}>Sign Up</LoginButton>);
+        }
 
-    return <MainDiv>{headerArray}</MainDiv>;
-  }
+        return(
+            <MainDiv>
+                {headerArray}
+            </MainDiv>
+        )
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);
