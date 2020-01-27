@@ -60,7 +60,7 @@ class Feeling extends Component {
           <option value="Frustrated">Frustrated</option>
           <option value="Tired">Tired</option>
           <option value="Relaxed">Relaxed</option>
-          <option value="Tense">Tense</option>
+          <option value="Tense">Anxious</option>
           <option value="Excited">Excited</option>
           <option value="Distracted">Distracted</option>
         </SelectStyle>
@@ -71,5 +71,5 @@ class Feeling extends Component {
   }
 }
 
-connect(mapStateToProps)(Feeling);
-export default Feeling;
+
+export default connect(mapStateToProps, null)(Feeling);;

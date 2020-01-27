@@ -59,7 +59,7 @@ userController.login = (req, res, next) => {
     .then((response) => {
          //checks this line first to see if no username exists
          if(!response.rows[0]){
-            res.send("User name or password is wrong");  
+            res.send({username: "User name or password is wrong"});  
          }
         const hashed = response.rows[0].hashedpw;
         //  console.log(hashed);

@@ -70,10 +70,6 @@ const mapStateToProps = (reduxState) => {
     };
   };
 
-
-
-const wrong = [];
-
 class LogIn extends Component{
     constructor(props){
         super(props);
@@ -81,6 +77,10 @@ class LogIn extends Component{
         this.onUserNameChange = this.onUserNameChange.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);
         this.onFormClick = this.onFormClick.bind(this);
+
+        this.state = {
+           wrong: false
+        }
     }
 
     onUserNameChange(){
@@ -95,27 +95,36 @@ class LogIn extends Component{
     //"User name or password is wrong"
     onFormClick(e){
         e.preventDefault();
-        this.props.addUser();
-        const user ={
+        const user = {
             username: this.props.username,
             password: this.props.password
-        }
-        fetch('/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(user)
-        })
-        .then(res => res.json())
-        .then((response) => {
-           if(response == "User name or password is wrong"){
-            wrong.push(<WrongMessage>Username or password is incorrect</WrongMessage>);
-           }
-        });
+        };
+        fetch("/login",
+            {method: "POST",
+             headers: {
+              "Content-Type": "application/json"
+              },
+               body: JSON.stringify(user)
+              })
+            .then((response) => response.json())
+            .then((res) =>{
+             if(res.username == "User name or password is wrong"){
+                 this.setState({
+                     wrong: true
+                 });
+             }
+             else{
+                this.props.addUser();
+                this.props.changePage(2);
+             }
+            })
     }
 
     render(){
+        let wrong = [];
+        if(this.state.wrong){
+            wrong = [<br></br>, <WrongMessage>User name or password is wrong</WrongMessage>];
+        }
         return(
             <MainDiv>
                 <h1 style = {{textAlign: 'center'}}>Log In</h1>
@@ -126,11 +135,10 @@ class LogIn extends Component{
                         <br></br>
                         <br></br>
                         <label for = "password">Password: </label> 
-                        <input id = "password" type = "text" onChange = {this.onPasswordChange}></input>
+                        <input id = "password" type = "password" onChange = {this.onPasswordChange}></input>
                         <br></br>
                         <br></br>
                         <SubmitBitton onClick = {this.onFormClick}>Submit</SubmitBitton>
-                        <br></br>
                         {wrong}
                     </div>
                     <hr></hr>
