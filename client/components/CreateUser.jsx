@@ -45,7 +45,7 @@ const mapStateToProps = (reduxState) => {
     return {
       username: reduxState.username, 
       password: reduxState.password, 
-      userList: reduxState.userList
+      currentUser: reduxState.currentUser
     };
   };
   

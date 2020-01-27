@@ -1,8 +1,8 @@
 import * as types from './actionTypes.js';
 
 const initialState = {
-  //userList will be an array that holds user objects
-  userList: [],
+  // currentUser is where we'll store the name of the current user so that we can use it to address them on the main page of the app
+  currentUser: '',
   //username & password will be updated once a user submits their newly created username and password and will be reset to an empty string when the ADD_USER reducer runs
   username: '',
   password: '',
@@ -12,7 +12,6 @@ const initialState = {
 };
 
 const userReducers = (state = initialState, action) => {
-  let userList;
   switch (action.type) {
     case types.SET_USERNAME:
       //receives username via action.payload and updates state.username to equal the value.
@@ -29,17 +28,14 @@ const userReducers = (state = initialState, action) => {
       };
 
     case types.ADD_USER:
-      //creates a new user in the userList array by taking the newly added state.username & state.password values and putting them into a newUser object. This object is then added into the userList array
-      //resets state.username and state.password to empty strings after the values have been added to the newUser obj.
-      const newUser = {
-        username: state.username,
-        password: state.password
-      };
-      console.log("user: ", newUser);
+      // stores the name of the current user so that we can address them on other pages in the app.
+      //resets state.username and state.password to empty strings after the values.
+      const newUser = state.username;
+      console.log('user: ', newUser);
       //Might just have to send post to db
       return {
         ...state,
-        userList: state.userList.concat(newUser),
+        currentUser: newUser,
         username: '',
         password: ''
       };
