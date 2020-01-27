@@ -14,26 +14,27 @@ import * as actions from '../../redux/actions.js';
 
 //Styling for the whole header
 const MainDiv = styled.div`
-  width: 100%;
-  border-style: solid;
-  font-family: georgia;
-  text-align: center;
+  font-family: 'Assistant', sans-serif;
+  text-align: right;
 `;
 
 //Styling for the 'Mood-Ring' title
 const TitleText = styled.p`
+  text-align: center;
   margin: 2px;
+  font-family: 'Assistant', sans-serif;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 60px;
 `;
 
 //Styling for the Log In button
 const LoginButton = styled.button`
   text-decoration: none;
+  font-family: 'Assistant', sans-serif;
   border-radius: 20px;
-  color: black;
   font-size: 20px;
   margin: 3px;
+  color: black;
   &:focus {
     outline: none;
   }
@@ -74,22 +75,29 @@ class MainHeader extends Component {
   render() {
     console.log('Page in header:', this.props.page);
     const headerArray = [];
-    headerArray.push(<TitleText>Mood-Ring</TitleText>);
     if (this.props.page != 'UserFeed') {
       if (this.props.page != 'Login')
         headerArray.push(
-          <LoginButton href="" onClick={this.gotToLogin}>
+          <LoginButton
+            href=""
+            onClick={this.gotToLogin}
+            className="login-buttons"
+          >
             Log In
           </LoginButton>
         );
       if (this.props.page != 'Create')
         headerArray.push(
-          <LoginButton href="" onClick={this.gotToCreate}>
+          <LoginButton
+            href=""
+            onClick={this.gotToCreate}
+            className="login-buttons"
+          >
             Sign Up
           </LoginButton>
         );
     }
-
+    headerArray.push(<TitleText>Mood Ring</TitleText>);
     return <MainDiv>{headerArray}</MainDiv>;
   }
 }
