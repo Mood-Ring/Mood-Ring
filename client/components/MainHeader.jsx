@@ -19,6 +19,7 @@ const MainDiv = styled.div`
 `;
 
 //Styling for the 'Mood-Ring' title
+
 const TitleText = styled.p`
   text-align: center;
   margin: 2px;
@@ -29,6 +30,7 @@ const TitleText = styled.p`
 
 //Styling for the Log In button
 const LoginButton = styled.button`
+
   text-decoration: none;
   font-family: 'Assistant', sans-serif;
   border-radius: 20px;
@@ -62,6 +64,7 @@ class MainHeader extends Component {
 
     this.gotToLogin = this.gotToLogin.bind(this);
     this.gotToCreate = this.gotToCreate.bind(this);
+    this.gotToMain = this.gotToMain.bind(this);
   }
 
   gotToLogin() {
@@ -72,34 +75,25 @@ class MainHeader extends Component {
     this.props.changePage(3);
   }
 
-  render() {
-    console.log('Page in header:', this.props.page);
-    const headerArray = [];
-    if (this.props.page != 'UserFeed') {
-      if (this.props.page != 'Login')
-        headerArray.push(
-          <LoginButton
-            href=""
-            onClick={this.gotToLogin}
-            className="login-buttons"
-          >
-            Log In
-          </LoginButton>
-        );
-      if (this.props.page != 'Create')
-        headerArray.push(
-          <LoginButton
-            href=""
-            onClick={this.gotToCreate}
-            className="login-buttons"
-          >
-            Sign Up
-          </LoginButton>
-        );
+
+  gotToMain(){
+    this.props.changePage(0);
+}
+    render(){
+        console.log("Page in header:", this.props.page);
+        const headerArray = [];
+        headerArray.push(<TitleText onClick = {this.gotToMain}>Mood-Ring</TitleText>);
+        if(this.props.page != 'UserFeed'){
+            if(this.props.page != 'Login') headerArray.push(<LoginButton href = "" onClick = {this.gotToLogin}>Log In</LoginButton>);
+            if(this.props.page != 'Create') headerArray.push(<LoginButton href = "" onClick = {this.gotToCreate}>Sign Up</LoginButton>);
+        }
+
+        return(
+            <MainDiv>
+                {headerArray}
+            </MainDiv>
+        )
     }
-    headerArray.push(<TitleText>Mood Ring</TitleText>);
-    return <MainDiv>{headerArray}</MainDiv>;
-  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);

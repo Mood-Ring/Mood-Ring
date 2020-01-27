@@ -40,21 +40,42 @@ const LoginButton = styled.button`
   }
 `;
 
-const quote = `Time isn't the main thing. It's the only thing`;
-const author = `Miles Davis`;
 
-class LandingPageBody extends Component {
-  constructor(props) {
-    super(props);
-  }
+class LandingPageBody extends Component{
+    constructor(props){
+        super(props);
+
+        this.state = {
+            quote: '', 
+            author: ''
+         }
+    }
+
+
+    componentDidMount(){
+        fetch("https://type.fit/api/quotes")
+        .then((res) => res.json())
+        .then((res) => {
+        let rand = Math.floor(Math.random() * 1620);
+        console.log(res[rand].author);
+        if(res[rand].author == null){
+            this.setState({
+                quote: res[rand].text, 
+                author: 'Jon Gonzalez'
+            });
+        }
+        else{
+           this.setState({
+               quote: res[rand].text, 
+               author: res[rand].author
+           });
+        }
+        })
+    }
 
   render() {
     //Variable for dynamic quote fetching
-    const quoteComp = (
-      <Quote>
-        "{quote}" - {author}
-      </Quote>
-    );
+    const quoteComp = <Quote>"{this.state.quote}" - {this.state.author}</Quote>
 
     return (
       <MainDiv>

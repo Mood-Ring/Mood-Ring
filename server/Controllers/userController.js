@@ -13,7 +13,7 @@ userController.createUser = (req,res, next) => {
 
     bcrypt.hash(req.body.password, roundsOfSalt, (err, hash) => {
         if(err){
-            console.log("Something went wront with Bcryption")
+            console.log("Something went wrong with Bcryption")
             res.send(err.stack);
         } else {  //begining of successful bcryption
             res.locals.hash = hash;
@@ -50,9 +50,6 @@ userController.login = (req, res, next) => {
    
 
 
-
-
-
     const user = req.body.username;
     const checkString = `SELECT * FROM customer WHERE username='${user}'`;
     // const checkString = `SELECT hashedpw FROM customer WHERE username='${user}'`;
@@ -62,7 +59,7 @@ userController.login = (req, res, next) => {
     .then((response) => {
          //checks this line first to see if no username exists
          if(!response.rows[0]){
-            res.send("User name or password is wronng")  
+            res.send({username: "User name or password is wrong"});  
          }
         const hashed = response.rows[0].hashedpw;
         //  console.log(hashed);
@@ -74,7 +71,7 @@ userController.login = (req, res, next) => {
           if(!result)
            {
             console.log("User name or password is wronng", bcerr);
-            res.send("User name or password is wronng") 
+            res.send({username: "User name or password is wrong"});
             
            } else 
            {

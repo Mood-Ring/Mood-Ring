@@ -49,6 +49,34 @@ const mapStateToProps = (reduxState) => {
 class Feeling extends Component {
   constructor(props) {
     super(props);
+
+    this.sendMood = this.sendMood.bind(this);
+  }
+
+  sendMood(){
+
+    const value = document.getElementById("selector").value;
+
+    const user = {
+      username: this.props.username,
+      mood: value
+    };
+
+    fetch('/mood', 
+    { method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(user)
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log("Error", err);
+    })
+  
   }
 
   render() {
@@ -56,21 +84,20 @@ class Feeling extends Component {
     return (
       <MainDiv>
         <h1>How are you feeling today {cur}?</h1>
-        <SelectStyle>
-          <option value="Happy">Happy</option>
-          <option value="Sad">Sad</option>
-          <option value="Frustrated">Frustrated</option>
-          <option value="Tired">Tired</option>
-          <option value="Relaxed">Relaxed</option>
-          <option value="Tense">Tense</option>
-          <option value="Excited">Excited</option>
-          <option value="Distracted">Distracted</option>
+        <SelectStyle id = "selector">
+          <option value="happy">Happy</option>
+          <option value="sad">Sad</option>
+          <option value="frustrated">Frustrated</option>
+          <option value="tired">Tired</option>
+          <option value="relaxed">Relaxed</option>
+          <option value="tense">Anxious</option>
+          <option value="excited">Excited</option>
+          <option value="distracted">Distracted</option>
         </SelectStyle>
         <br></br>
-        <SubmitBitton>Submit</SubmitBitton>
+        <SubmitBitton onClick = {this.sendMood}>Submit</SubmitBitton>
       </MainDiv>
     );
   }
 }
-
-export default connect(mapStateToProps)(Feeling);
+export default connect(mapStateToProps, null)(Feeling);;

@@ -47,21 +47,24 @@ const mapStateToProps = (reduxState) => {
     password: reduxState.password,
     currentUser: reduxState.currentUser
   };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  //used to bring in actions that will be dispatched within the components on this page.
-  //   syncMarkets: () => dispatch(actions.syncMarkets())
-  return {
-    setUsername: (userN) => {
-      dispatch(actions.setUsername(userN));
-    },
-    setPassword: (password) => {
-      dispatch(actions.setPassword(password));
-    },
-    addUser: () => {
-      dispatch(actions.addUser());
-    }
+  
+  const mapDispatchToProps = (dispatch) => {
+    //used to bring in actions that will be dispatched within the components on this page.
+    return {
+      setUsername: (userN) => {
+        dispatch(actions.setUsername(userN));
+      },
+      setPassword: (password) => {
+        dispatch(actions.setPassword(password));
+      }, 
+      addUser: () => {
+        dispatch(actions.addUser());
+      }, 
+      changePage: (index) => {
+        dispatch(actions.changePage(index));
+      }
+    };
   };
 };
 
@@ -84,21 +87,21 @@ class CreateUser extends Component {
     this.props.setPassword(value);
   }
 
-  onFormClick(e) {
-    e.preventDefault();
-    this.props.addUser();
-    const user = {
-      username: this.props.username,
-      password: this.props.password
-    };
-    fetch('/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    });
-  }
+    onFormClick(e){
+        e.preventDefault();
+        this.props.addUser();
+        const user ={
+            username: this.props.username,
+            password: this.props.password
+        }
+        fetch('/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user)
+        }); 
+        this.props.changePage(2);
 
   render() {
     return (
@@ -112,7 +115,6 @@ class CreateUser extends Component {
               type="text"
               onChange={this.onUserNameChange}
             ></input>
-
             <br></br>
             <label for="password">Password: </label>
             <input
@@ -132,3 +134,4 @@ class CreateUser extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);
+

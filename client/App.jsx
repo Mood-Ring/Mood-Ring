@@ -20,7 +20,6 @@ const mapStateToProps = (reduxState) => {
 
 const mapDispatchToProps = (dispatch) => {
   //used to bring in actions that will be dispatched within the components on this page.
-  //   syncMarkets: () => dispatch(actions.syncMarkets())
   return {
     changePage: (index) => {
       dispatch(actions.changePage(index));

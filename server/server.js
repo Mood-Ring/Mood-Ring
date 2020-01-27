@@ -34,14 +34,14 @@ app.post('/signup', userController.createUser, (req, res) => {
     res.status(200).send({"username" : res.locals.user, "password" : res.locals.hash})
 });
 
-app.get('/login', userController.login, (req, res) => {
+app.post('/login', userController.login, (req, res) => {
     console.log('in res', res.locals.user)
-    res.status(200).send(res.locals.user)
+    res.status(200).send({username: res.locals.user})
 })
 
-app.get('/mood', userController.moodResponse, (req, res) => {
+app.post('/mood', userController.moodResponse, (req, res) => {
   //  console.log('in res', res.locals.user)
-    res.status(200).send(res.locals.moodresponse);
+    res.status(200).send({response: res.locals.moodresponse});
 })
 
 app.use((err, req, res, next) => {
