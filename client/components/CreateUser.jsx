@@ -103,34 +103,29 @@ class CreateUser extends Component {
         }); 
         this.props.changePage(2);
 
-  render() {
-    return (
-      <MainDiv>
-        <h1 style={{ textAlign: 'center' }}>Sign Up</h1>
-        <CreateForm>
-          <div className="center-form">
-            <label for="username">Username: </label>
-            <input
-              id="username"
-              type="text"
-              onChange={this.onUserNameChange}
-            ></input>
-            <br></br>
-            <label for="password">Password: </label>
-            <input
-              id="password"
-              type="text"
-              onChange={this.onPasswordChange}
-            ></input>
-            <br></br>
-            <SubmitBitton onClick={this.onFormClick}>
-              Create Account
-            </SubmitBitton>
-          </div>
-        </CreateForm>
-      </MainDiv>
-    );
-  }
+    }
+
+    render(){
+        return(
+            <MainDiv>
+                <h1 style = {{textAlign: 'center'}}>Sign Up</h1>
+                <CreateForm>
+                    <div style = {{marginLeft: '310px', marginTop: '70px'}}>
+                        <label for = "username">Username: </label> 
+                        <input id = "username" type = "text" onChange = {this.onUserNameChange}></input>
+                        <br></br>
+                        <br></br>
+                        <label for = "password">Password: </label> 
+                        <input id = "password" type = "password" onChange = {this.onPasswordChange}></input>
+                        <br></br>
+                        <br></br>
+                    </div>
+                    <SubmitBitton onClick = {this.onFormClick}>Create Account</SubmitBitton>
+                </CreateForm>
+            </MainDiv>
+        )
+    }
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);

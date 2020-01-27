@@ -20,6 +20,13 @@ const MainDiv = styled.div`
   text-align: center;
 `;
 
+const Response = styled.div`
+  width: 100%;
+  height: 20%;
+  text-align: center;
+  border: solid;
+`;
+
 const SelectStyle = styled.select`
   font-family: 'Assistant', sans-serif;
   height: 100px;
@@ -71,7 +78,7 @@ class Feeling extends Component {
     })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
+      
     })
     .catch((err) => {
       console.log("Error", err);
@@ -96,6 +103,7 @@ class Feeling extends Component {
         </SelectStyle>
         <br></br>
         <SubmitBitton onClick = {this.sendMood}>Submit</SubmitBitton>
+        {/* <Response>I'm a response</Response> */}
       </MainDiv>
     );
   }
