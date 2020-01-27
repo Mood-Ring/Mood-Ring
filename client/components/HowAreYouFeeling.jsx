@@ -24,7 +24,6 @@ const Response = styled.div`
   width: 100%;
   height: 20%;
   text-align: center;
-  border: solid;
 `;
 
 const SelectStyle = styled.select`
@@ -57,6 +56,10 @@ class Feeling extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      response: ''
+   }
+
     this.sendMood = this.sendMood.bind(this);
   }
 
@@ -78,7 +81,9 @@ class Feeling extends Component {
     })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
+      this.setState({
+        response: data.response
+      });
     })
     .catch((err) => {
       console.log("Error", err);
@@ -97,13 +102,13 @@ class Feeling extends Component {
           <option value="frustrated">Frustrated</option>
           <option value="tired">Tired</option>
           <option value="relaxed">Relaxed</option>
-          <option value="tense">Anxious</option>
+          <option value="anxious">Anxious</option>
           <option value="excited">Excited</option>
           <option value="distracted">Distracted</option>
         </SelectStyle>
         <br></br>
         <SubmitBitton onClick = {this.sendMood}>Submit</SubmitBitton>
-        {/* <Response>I'm a response</Response> */}
+        <Response>{this.state.response}</Response> 
       </MainDiv>
     );
   }
