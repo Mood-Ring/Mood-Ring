@@ -3,6 +3,7 @@ body {
   background-image: url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
   background-size: cover;
   background-position: center center;
+  text-align: center;
 }
 
 #root {
@@ -25,8 +26,9 @@ h1 {
 }
 
 button {
-  color: rgb(208, 209, 236);
   opacity: 0.6;
+  border-radius: 20px;
+  color: black;
 }
 button:hover {
   background-color: #ffffff;
@@ -38,10 +40,6 @@ button:hover {
   text-align: center;
 }
 .login-form {
-  text-align: center;
-}
-
-.center-form {
   text-align: center;
 }
 

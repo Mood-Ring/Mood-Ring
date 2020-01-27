@@ -30,7 +30,6 @@ const TitleText = styled.p`
 
 //Styling for the Log In button
 const LoginButton = styled.button`
-
   text-decoration: none;
   font-family: 'Assistant', sans-serif;
   border-radius: 20px;
@@ -75,25 +74,29 @@ class MainHeader extends Component {
     this.props.changePage(3);
   }
 
-
-  gotToMain(){
+  gotToMain() {
     this.props.changePage(0);
-}
-    render(){
-        console.log("Page in header:", this.props.page);
-        const headerArray = [];
-        headerArray.push(<TitleText onClick = {this.gotToMain}>Mood-Ring</TitleText>);
-        if(this.props.page != 'UserFeed'){
-            if(this.props.page != 'Login') headerArray.push(<LoginButton href = "" onClick = {this.gotToLogin}>Log In</LoginButton>);
-            if(this.props.page != 'Create') headerArray.push(<LoginButton href = "" onClick = {this.gotToCreate}>Sign Up</LoginButton>);
-        }
-
-        return(
-            <MainDiv>
-                {headerArray}
-            </MainDiv>
-        )
+  }
+  render() {
+    console.log('Page in header:', this.props.page);
+    const headerArray = [];
+    if (this.props.page != 'UserFeed') {
+      if (this.props.page != 'Login')
+        headerArray.push(
+          <LoginButton href="" onClick={this.gotToLogin}>
+            log in
+          </LoginButton>
+        );
+      if (this.props.page != 'Create')
+        headerArray.push(
+          <LoginButton href="" onClick={this.gotToCreate}>
+            sign up
+          </LoginButton>
+        );
     }
+    headerArray.push(<TitleText onClick={this.gotToMain}>mood ring</TitleText>);
+    return <MainDiv>{headerArray}</MainDiv>;
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);

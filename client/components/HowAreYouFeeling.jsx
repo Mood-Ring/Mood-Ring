@@ -13,11 +13,11 @@ import { connect } from 'react-redux';
 
 //The main body styling
 const MainDiv = styled.div`
-  font-family: 'Assistant', sans-serif;
-  width: 100%;
-  height: 300px;
-  margin-top: 10px;
   text-align: center;
+  width: 100%;
+  height: 700px;
+  margin-top: 10px;
+  font-family: 'Assistant', sans-serif;
 `;
 
 const Response = styled.div`
@@ -29,21 +29,22 @@ const Response = styled.div`
 
 const SelectStyle = styled.select`
   font-family: 'Assistant', sans-serif;
-  height: 100px;
-  width: 200px;
-  font-size: 30px;
+  max-height: 40px;
+  font-size: 18px;
+  max-width: 130px;
+  opacity: 0.6;
+  padding: 20px;
 `;
 
 const SubmitBitton = styled.button`
-  font-family: 'Assistant', sans-serif;
-  margin-top: 20px;
-  text-decoration: none;
-  border-radius: 20px;
-  color: black;
-  font-size: 20px;
-  &:focus {
-    outline: none;
-  }
+margin: auto;
+text-decoration: none;
+border-radius: 20px;
+opacity: 0.6%
+font-size: 20px;
+&:focus {
+  outline: none;
+}
 `;
 
 const mapStateToProps = (reduxState) => {
@@ -60,30 +61,28 @@ class Feeling extends Component {
     this.sendMood = this.sendMood.bind(this);
   }
 
-  sendMood(){
-
-    const value = document.getElementById("selector").value;
+  sendMood() {
+    const value = document.getElementById('selector').value;
 
     const user = {
       username: this.props.username,
       mood: value
     };
 
-    fetch('/mood', 
-    { method: "POST",
+    fetch('/mood', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(user)
     })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((err) => {
-      console.log("Error", err);
-    })
-  
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log('Error', err);
+      });
   }
 
   render() {
@@ -91,7 +90,7 @@ class Feeling extends Component {
     return (
       <MainDiv>
         <h1>How are you feeling today {cur}?</h1>
-        <SelectStyle id = "selector">
+        <SelectStyle id="selector">
           <option value="happy">Happy</option>
           <option value="sad">Sad</option>
           <option value="frustrated">Frustrated</option>
@@ -102,10 +101,11 @@ class Feeling extends Component {
           <option value="distracted">Distracted</option>
         </SelectStyle>
         <br></br>
-        <SubmitBitton onClick = {this.sendMood}>Submit</SubmitBitton>
+        <br></br>
+        <SubmitBitton onClick={this.sendMood}>submit</SubmitBitton>
         {/* <Response>I'm a response</Response> */}
       </MainDiv>
     );
   }
 }
-export default connect(mapStateToProps, null)(Feeling);;
+export default connect(mapStateToProps, null)(Feeling);

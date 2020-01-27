@@ -13,31 +13,33 @@ import * as actions from '../../redux/actions.js';
 
 //The main body styling
 const MainDiv = styled.div`
-  font-family: 'Assistant', sans-serif;
   text-align: center;
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 700px;
   margin-top: 10px;
+  font-family: 'Assistant', sans-serif;
 `;
 
 //The sign up form styling
 const CreateForm = styled.form`
+  clear: both;
+  text-align: right;
+  width: 50%;
+  height: 300px;
+  margin: auto;
   font-family: 'Assistant', sans-serif;
-  width: 100%;
-  height: 600px;
 `;
 
 //Submit button styling
 const SubmitBitton = styled.button`
-  margin: auto;
-  font-family: 'Assistant', sans-serif;
-  text-decoration: none;
-  border-radius: 20px;
-  font-size: 17px;
-  color: black;
-  &:focus {
-    outline: none;
-  }
+margin: auto;
+text-decoration: none;
+border-radius: 20px;
+opacity: 0.6%
+font-size: 20px;
+&:focus {
+  outline: none;
+}
 `;
 
 const mapStateToProps = (reduxState) => {
@@ -47,25 +49,24 @@ const mapStateToProps = (reduxState) => {
     password: reduxState.password,
     currentUser: reduxState.currentUser
   };
-
 };
 
 const mapDispatchToProps = (dispatch) => {
-    //used to bring in actions that will be dispatched within the components on this page.
-    return {
-      setUsername: (userN) => {
-        dispatch(actions.setUsername(userN));
-      },
-      setPassword: (password) => {
-        dispatch(actions.setPassword(password));
-      }, 
-      addUser: () => {
-        dispatch(actions.addUser());
-      }, 
-      changePage: (index) => {
-        dispatch(actions.changePage(index));
-      }
-    };
+  //used to bring in actions that will be dispatched within the components on this page.
+  return {
+    setUsername: (userN) => {
+      dispatch(actions.setUsername(userN));
+    },
+    setPassword: (password) => {
+      dispatch(actions.setPassword(password));
+    },
+    addUser: () => {
+      dispatch(actions.addUser());
+    },
+    changePage: (index) => {
+      dispatch(actions.changePage(index));
+    }
+  };
 };
 
 class CreateUser extends Component {
@@ -87,44 +88,45 @@ class CreateUser extends Component {
     this.props.setPassword(value);
   }
 
-    onFormClick(e){
-        e.preventDefault();
-        this.props.addUser();
-        const user ={
-            username: this.props.username,
-            password: this.props.password
-        }
-        fetch('/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(user)
-        }); 
-        this.props.changePage(2);
-    }
+  onFormClick(e) {
+    e.preventDefault();
+    this.props.addUser();
+    const user = {
+      username: this.props.username,
+      password: this.props.password
+    };
+    fetch('/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    });
+    this.props.changePage(2);
+  }
   render() {
     return (
       <MainDiv>
-        <h1 style={{ textAlign: 'center' }}>Sign Up</h1>
         <CreateForm>
           <div className="center-form">
-            <label for="username">Username: </label>
+            <h1>sign up</h1>
+            <label for="username">username: </label>
             <input
               id="username"
               type="text"
               onChange={this.onUserNameChange}
             ></input>
             <br></br>
-            <label for="password">Password: </label>
+            <label for="password">password: </label>
             <input
               id="password"
               type="text"
               onChange={this.onPasswordChange}
             ></input>
             <br></br>
+            <br></br>
             <SubmitBitton onClick={this.onFormClick}>
-              Create Account
+              create account
             </SubmitBitton>
           </div>
         </CreateForm>
@@ -134,4 +136,3 @@ class CreateUser extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);
-

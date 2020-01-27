@@ -8,14 +8,14 @@
 
 import React from 'react';
 import { Component } from 'react';
-import styled  from 'styled-components';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions.js';
 
 //Styling for the whole body
 const MainDiv = styled.div`
   width: 100%;
-  height: 600px;
+  height: 700px;
   font-family: 'Assistant', sans-serif;
   text-align: center;
   margin-top: 10px;
@@ -33,7 +33,6 @@ const LoginButton = styled.button`
   text-decoration: none;
   color: black;
   font-size: 20px;
-  border-radius: 10px
   margin: 3px;
   width: 18%;
   height: 7%;
@@ -43,72 +42,75 @@ const LoginButton = styled.button`
 `;
 
 const mapStateToProps = (reduxState) => {
-    //used to bring in the pieces of state that the components on this page will use
-    return {
-      page: reduxState.page
-    };
+  //used to bring in the pieces of state that the components on this page will use
+  return {
+    page: reduxState.page
   };
-  
-  const mapDispatchToProps = (dispatch) => {
-    //used to bring in actions that will be dispatched within the components on this page.
-    return {
-      changePage: (index) => {
-        dispatch(actions.changePage(index));
-      }
-    };
-  };
+};
 
-class LandingPageBody extends Component{
-    constructor(props){
-        super(props);
-
-        this.state = {
-            quote: '', 
-            author: ''
-         }
-
-         this.goToSignUp = this.goToSignUp.bind(this);
+const mapDispatchToProps = (dispatch) => {
+  //used to bring in actions that will be dispatched within the components on this page.
+  return {
+    changePage: (index) => {
+      dispatch(actions.changePage(index));
     }
+  };
+};
 
+class LandingPageBody extends Component {
+  constructor(props) {
+    super(props);
 
-    componentDidMount(){
-        fetch("https://type.fit/api/quotes")
-        .then((res) => res.json())
-        .then((res) => {
+    this.state = {
+      quote: '',
+      author: ''
+    };
+
+    this.goToSignUp = this.goToSignUp.bind(this);
+  }
+
+  componentDidMount() {
+    fetch('https://type.fit/api/quotes')
+      .then((res) => res.json())
+      .then((res) => {
         let rand = Math.floor(Math.random() * 1620);
         console.log(res[rand].author);
-        if(res[rand].author == null){
-            this.setState({
-                quote: res[rand].text, 
-                author: 'Jon Gonzalez'
-            });
+        if (res[rand].author == null) {
+          this.setState({
+            quote: res[rand].text,
+            author: 'Jon Gonzalez'
+          });
+        } else {
+          this.setState({
+            quote: res[rand].text,
+            author: res[rand].author
+          });
         }
-        else{
-           this.setState({
-               quote: res[rand].text, 
-               author: res[rand].author
-           });
-        }
-        })
-    }
+      });
+  }
 
-    goToSignUp(){
-        this.props.changePage(3);
-    }
+  goToSignUp() {
+    this.props.changePage(3);
+  }
 
-    render(){
+  render() {
     //Variable for dynamic quote fetching
-    const quoteComp = <Quote>"{this.state.quote}" - {this.state.author}</Quote>
+    const quoteComp = (
+      <Quote>
+        "{this.state.quote}" - {this.state.author}
+      </Quote>
+    );
 
-        return(
-            <MainDiv>
-                {quoteComp}
-                <br></br>
-                <LoginButton onClick = {this.goToSignUp}>Start Today</LoginButton>
-            </MainDiv>
-        )
-    }
+    return (
+      <MainDiv>
+        {quoteComp}
+        <br></br>
+        <LoginButton className="start-today" onClick={this.goToSignUp}>
+          start today
+        </LoginButton>
+      </MainDiv>
+    );
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPageBody);
-
