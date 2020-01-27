@@ -13,7 +13,7 @@ userController.createUser = (req,res, next) => {
 
     bcrypt.hash(req.body.password, roundsOfSalt, (err, hash) => {
         if(err){
-            console.log("Something went wront with Bcryption")
+            console.log("Something went wrong with Bcryption")
             res.send(err.stack);
         } else {  //begining of successful bcryption
             res.locals.hash = hash;
@@ -48,9 +48,6 @@ userController.login = (req, res, next) => {
     //compare hash with saved hash
     
    
-
-
-
 
 
     const user = req.body.username;
