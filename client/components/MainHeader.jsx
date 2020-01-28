@@ -25,7 +25,7 @@ const TitleText = styled.p`
   margin: 2px;
   font-family: 'Assistant', sans-serif;
   font-weight: bold;
-  font-size: 60px;
+  font-size: 80px;
 `;
 
 //Styling for the Log In button
@@ -84,17 +84,17 @@ class MainHeader extends Component {
       if (this.props.page != 'Login')
         headerArray.push(
           <LoginButton href="" onClick={this.gotToLogin}>
-            log in
+            Log in
           </LoginButton>
         );
       if (this.props.page != 'Create')
         headerArray.push(
           <LoginButton href="" onClick={this.gotToCreate}>
-            sign up
+            Sign up
           </LoginButton>
         );
     }
-    headerArray.push(<TitleText onClick={this.gotToMain}>mood ring</TitleText>);
+    headerArray.push(<TitleText onClick={this.gotToMain}>m☯☯d ring</TitleText>);
     return <MainDiv>{headerArray}</MainDiv>;
   }
 }

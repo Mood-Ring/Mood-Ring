@@ -15,7 +15,7 @@ import * as actions from '../../redux/actions.js';
 const MainDiv = styled.div`
   text-align: center;
   width: 80%;
-  height: 700px;
+  height: 650px;
   margin-top: 10px;
   font-family: 'Assistant', sans-serif;
 `;
@@ -109,7 +109,7 @@ class CreateUser extends Component {
       <MainDiv>
         <CreateForm>
           <div className="center-form">
-            <h1>sign up</h1>
+            <h1>Sign up</h1>
             <label for="username">username: </label>
             <input
               id="username"
@@ -120,13 +120,13 @@ class CreateUser extends Component {
             <label for="password">password: </label>
             <input
               id="password"
-              type="text"
+              type="password"
               onChange={this.onPasswordChange}
             ></input>
             <br></br>
             <br></br>
             <SubmitBitton onClick={this.onFormClick}>
-              create account
+              Create Account
             </SubmitBitton>
           </div>
         </CreateForm>

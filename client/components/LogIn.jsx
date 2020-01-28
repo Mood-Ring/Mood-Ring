@@ -14,7 +14,7 @@ import * as actions from '../../redux/actions.js';
 const MainDiv = styled.div`
   text-align: center;
   width: 80%;
-  height: 700px;
+  height: 650px;
   margin-top: 10px;
   font-family: 'Assistant', sans-serif;
 `;
@@ -132,8 +132,8 @@ class LogIn extends Component {
     return (
       <MainDiv>
         <LogForm>
-          <h1>log in</h1>
           <div>
+            <h1>log in</h1>
             <label for="username">username: </label>
             <input
               id="username"

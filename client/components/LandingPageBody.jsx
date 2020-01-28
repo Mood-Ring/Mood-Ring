@@ -15,7 +15,7 @@ import * as actions from '../../redux/actions.js';
 //Styling for the whole body
 const MainDiv = styled.div`
   width: 100%;
-  height: 700px;
+  height: 650px;
   font-family: 'Assistant', sans-serif;
   text-align: center;
   margin-top: 10px;

@@ -46,3 +46,7 @@ button:hover {
 input {
   opacity: 0.6;
 }
+.return-text {
+  font-size: 50px;
+  padding-top: 100px;
+}

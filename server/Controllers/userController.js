@@ -100,7 +100,7 @@ userController.moodResponse = (req, res, next) => {
      // console.log(response)
 
      //gets a random moodresponse for every currentMood in table
-     const random = Math.floor(Math.random() * Math.floor(3));
+     const random = Math.floor(Math.random() * Math.floor(response.rows.length));
 
      //sends back moodResponse data
      res.locals.moodresponse = response.rows[random].moodresponse;
