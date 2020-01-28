@@ -1,4 +1,4 @@
-import * as types from './actionTypes.js';
+import * as types from './constants/actionTypes.js/index.js';
 
 const initialState = {
   // currentUser is where we'll store the name of the current user so that we can use it to address them on the main page of the app
