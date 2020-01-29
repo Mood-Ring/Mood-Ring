@@ -11,9 +11,6 @@ const userRouter = require('./Routes/userRoutes.js');
 // const apiRouter = require('./Routes/apiRoutes');
 // const authRouter = require('./Routes/authRoutes');
 
-
-// connects to externally hosted mongoDB 
-
 app.use(cookieParser());
 app.use(bodyParser.json());
 
@@ -35,6 +32,7 @@ app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
 
+// conncection for externally hosted mongoDB
 mongoose.connect(mongoURI, () => {
   console.log('connected to mongoDB');
 })
@@ -43,6 +41,8 @@ app.use('/user', userRouter);
 // app.use('/api', apiRouter);
 // app.use('/auth', authRouter);
 
+
+// golbal error handler for middleware
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',

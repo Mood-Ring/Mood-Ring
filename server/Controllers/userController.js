@@ -77,27 +77,4 @@ userController.login = (req, res, next) => {
 };
 
 
-// retreives a mood response for input mood
-// userController.moodResponse = (req, res, next) => {
-//   const { mood } = req.body;
-
-//   // will query an a array @ respose.rows that will have all the moodResponses @mood selected
-//   const queryString = `SELECT moodresponse from mood WHERE currentMood='${mood}'`;
-
-//   db.query(queryString, [])
-//     .then((response) => {
-//       // console.log(response)
-
-//       // gets a random moodresponse for every currentMood in table
-//       const random = Math.floor(Math.random() * Math.floor(response.rows.length));
-
-//       // sends back moodResponse data
-//       res.locals.moodresponse = response.rows[random].moodresponse;
-
-//       next();
-//     })
-//     .catch((qerr) => console.log(qerr));
-//   // console.log('in mood', req.body);
-// };
-
 module.exports = userController;
