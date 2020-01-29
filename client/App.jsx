@@ -5,6 +5,7 @@ import BottomLinks from './components/BottomLinks.jsx';
 import LogIn from './components/LogIn.jsx';
 import Feeling from './components/HowAreYouFeeling.jsx';
 import CreateUser from './components/CreateUser.jsx';
+import MoodContainer from './components/'
 import * as actions from '../redux/actions.js';
 import { connect } from 'react-redux';
 
