@@ -1,14 +1,32 @@
 const express = require('express');
 const path = require('path');
+const passport = require('passport');
+require('dotenv').config();
+// This passport config allows our passport strategies to be available in our middleware process
+require('./services/strategies');
 
 const app = express();
 const PORT = 3000;
+
+const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
+
 const userRouter = require('./Routes/userRoutes.js');
+const authRouter = require('./Routes/authRoutes');
 // const apiRouter = require('./Routes/apiRoutes');
-// const authRouter = require('./Routes/authRoutes');
+
+// max age is in milliseconds
+// our secret will be used to encrypt our cookie when we send to browser
+app.use(cookieSession({
+  maxAge: 86400000,
+  keys: [process.env.SECRET],
+}));
+
+// initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -31,8 +49,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/user', userRouter);
+app.use('/auth', authRouter);
 // app.use('/api', apiRouter);
-// app.use('/auth', authRouter);
 
 app.use((err, req, res, next) => {
   const defaultErr = {

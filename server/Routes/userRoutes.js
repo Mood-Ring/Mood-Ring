@@ -12,5 +12,9 @@ router.post('/login', userController.login, (req, res) => {
   return res.status(200).json({ username: res.locals.username });
 });
 
+router.get('/logout', (req, res) => {
+
+});
+
 
 module.exports = router;
