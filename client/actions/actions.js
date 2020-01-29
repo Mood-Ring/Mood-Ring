@@ -1,4 +1,4 @@
-import * as types from './actionTypes.js.js';
+import * as types from '../constants/actionTypes.js';
 
 // ------ ACTIONS
 

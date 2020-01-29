@@ -10,7 +10,7 @@ import React from 'react';
 import { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import * as actions from '../../redux/actions.js';
+import * as actions from '../actions/actions.js';
 
 //Styling for the whole body
 const MainDiv = styled.div`
