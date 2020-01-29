@@ -1,12 +1,21 @@
+/**
+ *
+ * index.js
+ * Entry point for application.
+ * Hangs React app off of 'root' in index.html.
+ *
+ */
+
 import React from 'react';
 import { render } from 'react-dom';
-
-import App from './App.jsx';
 import { Provider } from 'react-redux';
+import App from './App.jsx';
 import store from './store.js';
-import './style.css';
+// so webpack can bundle styles
+import styles from './style.css';
 
 render(
+  // wrap the App in the Provider and pass in the store
   <Provider store={store}>
     <App />
   </Provider>,

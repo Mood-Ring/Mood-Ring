@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import userReducers from './reducers/reducers.js/index.js';
+import userReducers from './reducers.js';
 
 export default combineReducers({
   reduxState: userReducers

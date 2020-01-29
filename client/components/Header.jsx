@@ -1,6 +1,6 @@
 /***************************\
 *                           *
-*  Main Header: The header  *
+*  Header: The header  *
 *  for every page on the    *
 *  site.                    *
 *                           *
@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-class MainHeader extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
 
@@ -99,4 +99,4 @@ class MainHeader extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
