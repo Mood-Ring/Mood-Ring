@@ -56,6 +56,7 @@ class App extends Component {
         break;
     }
     display.push(<BottomLinks key='bottomlinks'/>);
+    // display.push(<MoodContainer key='moodContainer'></MoodContainer>);
     return <div>{display}</div>;
   }
 }

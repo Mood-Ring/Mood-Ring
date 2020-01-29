@@ -16,9 +16,9 @@ class MoodContainer extends Component {
         super(props);
         const moodArray = [];
     }
-    componentDidMount() {
-      fetch('/moods', {
-        method: 'GET',
+    componentWillMount() {
+      fetch('/getUserMoods', {
+        method: 'POST',
         headers: {
         'Content-Type': 'application/json'
         },
@@ -33,12 +33,12 @@ class MoodContainer extends Component {
       .catch(err => console.log(err))
     }
     render() {
-        let toRender = [];
-        if (moodArray.length>0) {
-            toRender = moodArray;
-        }
-
+      (
+        <div>
+            {moodArray}
+        </div>
+      )
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(moodContainer);
+export default connect(mapStateToProps)(MoodContainer);

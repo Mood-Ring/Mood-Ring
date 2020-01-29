@@ -7,4 +7,4 @@ const MoodDisplay = (props) => (
     </div>
 );
 
-export default moodDisplay;
+export default MoodDisplay;
