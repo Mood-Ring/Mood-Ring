@@ -55,7 +55,9 @@ class App extends Component {
         break;
     }
     display.push(<BottomLinks />);
-    return <div>{display}</div>;
+    return (
+      <div>{display}</div>
+    )
   }
 }
 
