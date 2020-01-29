@@ -11,9 +11,6 @@ const initialState = {
   // store quote and author we get back from fetch request to quotes API
   quote: '',
   author: '',
-  // pages: action.payload will bring over an index that we can use to pull the page they want
-  page: 'Home',
-  pages: ['Home', 'Login', 'UserFeed', 'Create'],
 };
 
 const userReducers = (state = initialState, action) => {
@@ -45,29 +42,20 @@ const userReducers = (state = initialState, action) => {
         password: '',
       };
 
-    case types.CHANGE_PAGE:
-      // receives an index via action.payload and returns the page the user has requested to see by pulling the path at that specific index.
-      // const newPage = state.pages[action.payload];
-      return {
-        ...state,
-        page: state.pages[action.payload],
-      };
-
     case types.SAVE_RESPONSE:
       return {
         ...state,
         response: action.payload,
       };
 
-      case types.SAVE_QUOTE:
+    case types.SAVE_QUOTE:
       return {
         ...state,
         quote: action.quote,
         author: action.author,
       };
-      
+
     default: return state;
-    
   }
 };
 
