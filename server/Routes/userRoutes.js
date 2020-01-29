@@ -15,6 +15,11 @@ router.post('/login', userController.login, (req, res) => {
   return res.status(200).json({ username: res.locals.username });
 });
 
+router.get('/logout', (req, res) => {
+
+});
+
+
 // functionality for saving user's mood and sending mood response back to front end
 router.post('/mood', moodController.saveMood, moodController.sendMoodResponse, (req, res) => {
   console.log('res.locals.response is: ', res.locals.response)

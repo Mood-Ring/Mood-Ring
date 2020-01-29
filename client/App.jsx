@@ -5,7 +5,7 @@ import BottomLinks from './components/BottomLinks.jsx';
 import LogIn from './components/LogIn.jsx';
 import Feeling from './components/HowAreYouFeeling.jsx';
 import CreateUser from './components/CreateUser.jsx';
-import * as actions from '../redux/actions.js';
+import * as actions from './actions/actions.js';
 import { connect } from 'react-redux';
 
 const page1 = 'Create';
@@ -55,7 +55,9 @@ class App extends Component {
         break;
     }
     display.push(<BottomLinks />);
-    return <div>{display}</div>;
+    return (
+      <div>{display}</div>
+    )
   }
 }
 

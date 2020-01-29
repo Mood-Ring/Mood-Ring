@@ -8,7 +8,7 @@ import React from 'react';
 import { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import * as actions from '../../redux/actions.js';
+import * as actions from '../actions/actions.js';
 
 //The main body styling
 const MainDiv = styled.div`
@@ -153,6 +153,8 @@ class LogIn extends Component {
             {wrong}
           </div>
         </LogForm>
+        <a href="/auth/google">Google Button</a>
+        <a href="/auth/spotify">Spotify Button</a>
       </MainDiv>
     );
   }
