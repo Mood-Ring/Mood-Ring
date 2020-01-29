@@ -1,96 +1,103 @@
 const bcrypt = require('bcrypt');
 const db = require('../Models/db');
-// salt rounds are how many times password will runn through hash function
-const roundsOfSalt = 3;
+// salt rounds are how many times password will run through hash function
+const roundsOfSalt = 10;
 
 const userController = {};
 
 userController.createUser = (req, res, next) => {
-  // ecrypt inserted password with bcrype, new hashedpw saved in database as 'hashedpw'
-  // entire function is wrapped in bcrypt function
-
-
+  // encrypt inserted password with bcrypt, new hashed pw saved in database as 'hash'
   bcrypt.hash(req.body.password, roundsOfSalt, (err, hash) => {
     if (err) {
-      console.log('Something went wrong with Bcryption');
-      res.send(err.stack);
-    } else { // begining of successful bcryption
-      // creating user row in database if successful bcryption, if fail will never enter in db
-      const createString = 'INSERT INTO customer (username, hash) VALUES ($1, $2)';
-      const values = [`${req.body.username}`, `${hash}`];
-
-      // database query passing rows with dynamic values
-      res.locals.user = req.body.username;
-      db.query(createString, values, (error, response) => {
-        if (error) {
-          console.log('There was an error in the query string', error);
-        } else {
-          console.log('res.locals.user updated on successful update to database', res.locals.user);
-        }
-        next();
-      }); // End of query funtion
-    // end of successful bcryption
+      return next({
+        log: err,
+        message: {
+          err: 'Error in Bcrypt Middleware. Check logs for error',
+        },
+      });
     }
-  }); // end of bcrypt function
+    // creating user row in database if successful bcryption
+    const queryString = 'INSERT INTO users (username, hash) VALUES ($1, $2)';
+    const values = [req.body.username, hash];
+
+    res.locals.username = req.body.username;
+    // db.query to create new user row in User table
+    db.query(queryString, values, (error, response) => {
+      if (error) {
+        return next({
+          log: error,
+          message: {
+            err: 'Error in database query. Check log for error message',
+          },
+        });
+      }
+      console.log(`${res.locals.username} successfully created in database`);
+      next();
+    });
+  });
 };
 
 userController.login = (req, res, next) => {
-  // compare hash with saved hash
-
-
-  const user = req.body.username;
-  const checkString = `SELECT * FROM customer WHERE username='${user}'`;
-  // const checkString = `SELECT hashedpw FROM customer WHERE username='${user}'`;
-  // console.log('checking string', user)
-
-  db.query(checkString, [])
-    .then((response) => {
-      // checks this line first to see if no username exists
-      if (!response.rows[0]) {
-        res.send({ username: 'User name or password is wrong' });
-      }
-      const hashed = response.rows[0].hashedpw;
-      //  console.log(hashed);
-
-
-      bcrypt.compare(req.body.password, hashed, (bcerr, result) => {
-        // if passwords do not match
-        if (!result) {
-          console.log('User name or password is wronng', bcerr);
-          res.send({ username: 'User name or password is wrong' });
-        } else {
-          console.log('Successful login');
-          // sending back to front end username
-          res.locals.user = user;
-          next();
-        }
+  const queryString = 'SELECT * FROM users WHERE username= $1';
+  const values = [req.body.username];
+  // db.query to verify user in User table
+  db.query(queryString, values, (err, response) => {
+    if (err) {
+      return next({
+        log: err,
+        message: {
+          err: 'Error in database query. Check log for error message',
+        },
       });
-    })
-    .catch((errd) => console.log(errd, 'Error or Username or Password is wrong'));
+    }
+    // if user row is empty return an error message
+    if (!response.rows.length) {
+      return res.json({ errorMessage: 'Username or password is incorrect' });
+    }
+    // initializing variable for hash stored in returned user row
+    const { hash } = response.rows[0];
+    // bcrypt native compare password method
+    bcrypt.compare(req.body.password, hash, (error, result) => {
+      if (error) {
+        return next({
+          log: error,
+          message: {
+            err: 'Error in Bcrypt middleware. Check log for error message',
+          },
+        });
+      }
+      // if hashed inputted password does not match stored hash, return error
+      if (!result) {
+        return res.json({ errorMessage: 'Username or password is incorrect' });
+      }
+      res.locals.username = req.body.username;
+      next();
+    });
+  });
 };
 
 
 // retreives a mood response for input mood
-userController.moodResponse = (req, res, next) => {
-  const { mood } = req.body;
+// userController.moodResponse = (req, res, next) => {
+//   const { mood } = req.body;
 
-  // will query an a array @ respose.rows that will have all the moodResponses @mood selected
-  const queryString = `SELECT moodresponse from mood WHERE currentMood='${mood}'`;
+//   // will query an a array @ respose.rows that will have all the moodResponses @mood selected
+//   const queryString = `SELECT moodresponse from mood WHERE currentMood='${mood}'`;
 
-  db.query(queryString, [])
-    .then((response) => {
-      // console.log(response)
+//   db.query(queryString, [])
+//     .then((response) => {
+//       // console.log(response)
 
-      // gets a random moodresponse for every currentMood in table
-      const random = Math.floor(Math.random() * Math.floor(response.rows.length));
+//       // gets a random moodresponse for every currentMood in table
+//       const random = Math.floor(Math.random() * Math.floor(response.rows.length));
 
-      // sends back moodResponse data
-      res.locals.moodresponse = response.rows[random].moodresponse;
+//       // sends back moodResponse data
+//       res.locals.moodresponse = response.rows[random].moodresponse;
 
-      next();
-    })
-    .catch((qerr) => console.log(qerr));
-  // console.log('in mood', req.body);
-};
+//       next();
+//     })
+//     .catch((qerr) => console.log(qerr));
+//   // console.log('in mood', req.body);
+// };
 
 module.exports = userController;

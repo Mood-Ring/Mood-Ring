@@ -6,9 +6,9 @@ const PORT = 3000;
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-const userRouter = require('./Routes/userRoutes');
-const apiRouter = require('./Routes/apiRoutes');
-const authRouter = require('./Routes/authRoutes');
+const userRouter = require('./Routes/userRoutes.js');
+// const apiRouter = require('./Routes/apiRoutes');
+// const authRouter = require('./Routes/authRoutes');
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -31,8 +31,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/user', userRouter);
-app.use('/api', apiRouter);
-app.use('/auth', authRouter);
+// app.use('/api', apiRouter);
+// app.use('/auth', authRouter);
 
 app.use((err, req, res, next) => {
   const defaultErr = {
