@@ -23,6 +23,8 @@ const pool = new Pool({
  * 
  * should get values from the front end
  * 
+ * /mood/:userId
+ * 
  */
 
 
