@@ -38,24 +38,27 @@ class App extends Component {
   }
 
   render() {
-    const display = [];
-    display.push(<MainHeader key='mainheader'/>);
-    switch (this.props.page) {
-      case 'Home':
-        display.push(<LandingPageBody key='landingpagebody'/>);
-        break;
-      case 'Create':
-        display.push(<CreateUser key='createuser'/>);
-        break;
-      case 'Login':
-        display.push(<LogIn key='login'/>);
-        break;
-      case 'UserFeed':
-        display.push(<Feeling key='feeling'/>);
-        break;
-    }
-    display.push(<BottomLinks key='bottomlinks'/>);
-    return <div>{display}</div>;
+    // const display = [];
+    // display.push(<MainHeader key='mainheader'/>);
+    // switch (this.props.page) {
+    //   case 'Home':
+    //     display.push(<LandingPageBody key='landingpagebody'/>);
+    //     break;
+    //   case 'Create':
+    //     display.push(<CreateUser key='createuser'/>);
+    //     break;
+    //   case 'Login':
+    //     display.push(<LogIn key='login'/>);
+    //     break;
+    //   case 'UserFeed':
+    //     display.push(<Feeling key='feeling'/>);
+    //     break;
+    // }
+    // display.push(<BottomLinks key='bottomlinks'/>);
+    return (
+      <div>HELLO WORLD!!</div>
+    // <div>{display}</div>;
+    )
   }
 }
 

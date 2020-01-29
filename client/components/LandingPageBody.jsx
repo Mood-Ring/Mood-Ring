@@ -66,10 +66,10 @@ class LandingPageBody extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      quote: '',
-      author: ''
-    };
+    // this.state = {
+    //   quote: '',
+    //   author: ''
+    // };
 
     this.goToSignUp = this.goToSignUp.bind(this);
   }
@@ -82,7 +82,7 @@ class LandingPageBody extends Component {
         console.log(res[rand].author);
         if (res[rand].author == null) {
           this.props.saveQuote(res[rand].text, 'Jon Gonzalez')
-          
+
           // this.setState({
           //   quote: res[rand].text,
           //   author: 'Jon Gonzalez'

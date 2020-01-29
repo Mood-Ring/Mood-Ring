@@ -7,7 +7,7 @@ module.exports = {
   entry: './client/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
 
   // plugins: [new html({
@@ -22,21 +22,22 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
       },
       {
         test: /css$/,
         exclude: /node_modules/,
-        loaders: ['style-loader', 'css-loader']
-      }
-    ]
+        loaders: ['style-loader', 'css-loader'],
+      },
+    ],
   },
   devServer: {
     publicPath: '/dist/',
     proxy: {
-      '/': 'http://localhost:3000'
-    }
-  }
+      '/': 'http://localhost:3000',
+    },
+    historyApiFallback: true,
+  },
 };
