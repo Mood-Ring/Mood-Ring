@@ -13,6 +13,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 
+const mongoose = require('mongoose');
+
+const mongoURI = 'mongodb+srv://moodring:moody@moods-ggoun.mongodb.net/test?retryWrites=true&w=majority'
 const userRouter = require('./Routes/userRoutes.js');
 const authRouter = require('./Routes/authRoutes');
 // const apiRouter = require('./Routes/apiRoutes');
@@ -42,16 +45,24 @@ app.use((req, res, next) => {
   return next();
 });
 
+
 app.use('/dist', express.static(path.resolve(__dirname, '../dist/')));
 
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
 
+// conncection for externally hosted mongoDB
+mongoose.connect(mongoURI, () => {
+  console.log('connected to mongoDB');
+})
+
 app.use('/user', userRouter);
 app.use('/auth', authRouter);
 // app.use('/api', apiRouter);
 
+
+// golbal error handler for middleware
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
