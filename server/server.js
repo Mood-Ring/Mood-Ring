@@ -1,14 +1,18 @@
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
 
 const app = express();
 const PORT = 3000;
+const mongoURI = 'mongodb+srv://moodring:moody@moods-ggoun.mongodb.net/test?retryWrites=true&w=majority'
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-
 const userRouter = require('./Routes/userRoutes.js');
 // const apiRouter = require('./Routes/apiRoutes');
 // const authRouter = require('./Routes/authRoutes');
+
+
+// connects to externally hosted mongoDB 
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -24,11 +28,16 @@ app.use((req, res, next) => {
   return next();
 });
 
+
 app.use('/dist', express.static(path.resolve(__dirname, '../dist/')));
 
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
+
+mongoose.connect(mongoURI, () => {
+  console.log('connected to mongoDB');
+})
 
 app.use('/user', userRouter);
 // app.use('/api', apiRouter);
