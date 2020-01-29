@@ -1,6 +1,6 @@
 import { createStore } from 'redux';
 import reducers from './reducers/reducers.js';
-import {changePage} from './actions/actions.js/index.js'
+import {changePage} from './actions/actions.js';
 
 const store = createStore(reducers);
 store.dispatch(changePage(0));
