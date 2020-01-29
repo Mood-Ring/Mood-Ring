@@ -83,18 +83,18 @@ class MainHeader extends Component {
     if (this.props.page != 'UserFeed') {
       if (this.props.page != 'Login')
         headerArray.push(
-          <LoginButton href="" onClick={this.gotToLogin}>
+          <LoginButton key='login' href="" onClick={this.gotToLogin}>
             Log in
           </LoginButton>
         );
       if (this.props.page != 'Create')
         headerArray.push(
-          <LoginButton href="" onClick={this.gotToCreate}>
+          <LoginButton key='create' href="" onClick={this.gotToCreate}>
             Sign up
           </LoginButton>
         );
     }
-    headerArray.push(<TitleText onClick={this.gotToMain}>m☯☯d ring</TitleText>);
+    headerArray.push(<TitleText key='titletext' onClick={this.gotToMain}>m☯☯d ring</TitleText>);
     return <MainDiv>{headerArray}</MainDiv>;
   }
 }
