@@ -10,6 +10,8 @@ import React from 'react';
 import { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import * as actions from '../../redux/actions.js';
+
 
 //The main body styling
 const MainDiv = styled.div`
@@ -35,7 +37,7 @@ const SelectStyle = styled.select`
   padding: 20px;
 `;
 
-const SubmitBitton = styled.button`
+const SubmitButton = styled.button`
 margin: auto;
 text-decoration: none;
 border-radius: 20px;
@@ -49,18 +51,22 @@ font-size: 20px;
 const mapStateToProps = (reduxState) => {
   //used to bring in the pieces of state that the components on this page will use
   return {
-    currentUser: reduxState.currentUser
+    currentUser: reduxState.currentUser,
+    response: reduxState.response
   };
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveResponse: (response) => {
+      dispatch(actions.saveResponse(response))
+    }
+  }
+}
 
 class Feeling extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      response: ''
-    };
-
     this.sendMood = this.sendMood.bind(this);
   }
 
@@ -81,9 +87,8 @@ class Feeling extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        this.setState({
-          response: data.response
-        });
+        console.log('data.response received after post request to mood', data.response)
+        this.props.saveResponse(data.response)
       })
       .catch((err) => {
         console.log('Error', err);
@@ -107,10 +112,10 @@ class Feeling extends Component {
         </SelectStyle>
         <br></br>
         <br></br>
-        <SubmitBitton onClick={this.sendMood}>submit</SubmitBitton>
-        <Response className="return-text">{this.state.response}</Response>
+        <SubmitButton onClick={this.sendMood}>submit</SubmitButton>
+        <Response className="return-text">{this.props.response}</Response>
       </MainDiv>
     );
   }
 }
-export default connect(mapStateToProps, null)(Feeling);
+export default connect(mapStateToProps, mapDispatchToProps)(Feeling);

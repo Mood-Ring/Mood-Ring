@@ -44,7 +44,9 @@ const LoginButton = styled.button`
 const mapStateToProps = (reduxState) => {
   //used to bring in the pieces of state that the components on this page will use
   return {
-    page: reduxState.page
+    page: reduxState.page,
+    quote: reduxState.quote,
+    author: reduxState.author
   };
 };
 
@@ -53,6 +55,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     changePage: (index) => {
       dispatch(actions.changePage(index));
+    },
+    saveQuote: (quote, author) => {
+      dispatch(actions.saveQuote(quote, author))
     }
   };
 };
@@ -76,15 +81,19 @@ class LandingPageBody extends Component {
         let rand = Math.floor(Math.random() * 1620);
         console.log(res[rand].author);
         if (res[rand].author == null) {
-          this.setState({
-            quote: res[rand].text,
-            author: 'Jon Gonzalez'
-          });
+          this.props.saveQuote(res[rand].text, 'Jon Gonzalez')
+          
+          // this.setState({
+          //   quote: res[rand].text,
+          //   author: 'Jon Gonzalez'
+          // });
         } else {
-          this.setState({
-            quote: res[rand].text,
-            author: res[rand].author
-          });
+          this.props.saveQuote(res[rand].text, res[rand].author)
+
+          // this.setState({
+          //   quote: res[rand].text,
+          //   author: res[rand].author
+          // });
         }
       });
   }
@@ -97,7 +106,7 @@ class LandingPageBody extends Component {
     //Variable for dynamic quote fetching
     const quoteComp = (
       <Quote>
-        "{this.state.quote}" - {this.state.author}
+        "{this.props.quote}" - {this.props.author}
       </Quote>
     );
 
