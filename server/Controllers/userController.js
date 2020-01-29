@@ -6,6 +6,8 @@ const saltRounds = 10;
 
 const userController = {};
 
+
+
 userController.createUser = (req, res, next) => {
     // will use bcrypt hash to create a hashed password
 
@@ -79,9 +81,6 @@ userController.createUser = (req, res, next) => {
 
 userController.login = (req, res, next) => {
     //compare hash with saved hash
-
-
-
     // convert to values-array format
 
     const user = req.body.username;
@@ -92,9 +91,13 @@ userController.login = (req, res, next) => {
     db.query(checkString, [])
         .then((response) => {
             //checks this line first to see if no username exists
+            // if we get an empty array back from the query, no user exists with that 
             if (!response.rows[0]) {
+                console.log(response);
                 res.send({ username: "User name or password is wrong" });
+                return next();
             }
+            console.log('USER EXISTS:', response.rows);
             const hashed = response.rows[0].hashedpw;
             //  console.log(hashed);
 
@@ -117,7 +120,6 @@ userController.login = (req, res, next) => {
         })
         .catch(errd => console.log(errd, "Error or Username or Password is wrong"));
 }
-
 
 
 //retreives a mood response for input mood
@@ -143,5 +145,45 @@ userController.moodResponse = (req, res, next) => {
     //console.log('in mood', req.body);
 
 };
+
+// retrieves all the moods from a specific user
+userController.getUserID = (req, res, next) => {
+    // first get the user id from the customer table
+    const getUserIDQUERY = 'SELECT __id FROM customer WHERE username=$1';
+
+    const { username } = req.body;
+
+    const getUserValue = [];
+    getUserValue.push(username);
+
+    db.query(getUserIDQUERY, getUserValue)
+        .then(response => {
+            console.log('GETUSER QUERY RESPONSE', response.rows[0]);
+            res.locals.user_id = response.rows[0].__id;
+            return next();
+        })
+        .catch(err => next(err));
+}
+
+userController.getUserMoods = (req, res, next) => {
+
+    // able to pull from res.locals.user_id
+    const { user_id } = res.locals;
+
+    const getUserMoods = 'SELECT mood, created_date FROM customer_moods WHERE user_id=$1';
+
+    const getUserMoodsValue = [user_id];
+
+    // use the user_id we got from previous query to get all the moods from our customer_moods table
+    db.query(getUserMoods, getUserMoodsValue)
+        .then(response => {
+            console.log('GET USER MOODS RESPONSE:', response.rows);
+            res.locals.userMoods = response.rows;
+            return next();
+        })
+        .catch(err => next(err));
+
+}
+
 
 module.exports = userController;

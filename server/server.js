@@ -28,6 +28,10 @@ app.post('/login', userController.login, (req, res) => {
     res.status(200).send({ username: res.locals.user })
 });
 
+app.get('/getUserMoods', userController.getUserID, userController.getUserMoods, (req, res) => {
+    res.json(res.locals.userMoods);
+});
+
 app.post('/mood', userController.moodResponse, (req, res) => {
     //  console.log('in res', res.locals.user)
     res.status(200).send({ response: res.locals.moodresponse });
