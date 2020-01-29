@@ -9,6 +9,7 @@ import { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions.js';
+import MainHeader from './MainHeader.jsx'
 
 //The main body styling
 const MainDiv = styled.div`
@@ -30,7 +31,7 @@ const LogForm = styled.form`
 `;
 
 //Submit button styling
-const SubmitBitton = styled.button`
+const SubmitButton = styled.button`
   margin: auto;
   text-decoration: none;
   border-radius: 20px;
@@ -79,6 +80,7 @@ class LogIn extends Component {
     this.onUserNameChange = this.onUserNameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onFormClick = this.onFormClick.bind(this);
+    this.changePage = this.changePage.bind(this);
 
     this.state = {
       wrong: false
@@ -120,7 +122,9 @@ class LogIn extends Component {
         }
       });
   }
-
+  changePage() {
+    this.props.history.push('/feeling')  
+  }
   render() {
     let wrong = [];
     if (this.state.wrong) {
@@ -131,6 +135,7 @@ class LogIn extends Component {
     }
     return (
       <MainDiv>
+        <MainHeader />
         <LogForm>
           <div>
             <h1>log in</h1>
@@ -149,7 +154,7 @@ class LogIn extends Component {
             ></input>
             <br></br>
             <br></br>
-            <SubmitBitton onClick={this.onFormClick}>submit</SubmitBitton>
+            <SubmitButton onClick={this.changePage}>submit</SubmitButton>
             {wrong}
           </div>
         </LogForm>
