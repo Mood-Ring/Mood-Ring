@@ -33,9 +33,11 @@ class MoodContainer extends Component {
       .catch(err => console.log(err))
     }
     render() {
-        <div>
-            {moodArray}
-        </div>
+        let toRender = [];
+        if (moodArray.length>0) {
+            toRender = moodArray;
+        }
+
     }
 }
 
