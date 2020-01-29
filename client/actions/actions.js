@@ -25,3 +25,28 @@ export const changePage = (index) => ({
   type: types.CHANGE_PAGE,
   payload: index
 });
+
+/* MOOD DATA */
+
+export const addressSearch = (date, mood) => (dispatch) => {
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      date,
+      mood,
+    }),
+  };
+  fetch('/user/mood', config)
+    .then((response) => response.json())
+    .then((data) => dispatch({
+      type: types.SEARCH_ADDRESS,
+      payload: {
+        address_search: `${address} ${borough}`,
+        current_results: data,
+      },
+    }))
+    .catch((err) => console.log(err));
+};

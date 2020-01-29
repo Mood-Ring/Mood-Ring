@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import MainHeader from './components/MainHeader.jsx';
 import LandingPageBody from './components/LandingPageBody.jsx';
+import Calendar from './components/Calendar.jsx';
 import BottomLinks from './components/BottomLinks.jsx';
 import LogIn from './components/LogIn.jsx';
-import Feeling from './components/HowAreYouFeeling.jsx';
+import MoodContainer from './components/MoodContainer.jsx';
 import CreateUser from './components/CreateUser.jsx';
 import * as actions from './actions/actions.js';
 import { connect } from 'react-redux';
@@ -51,9 +52,10 @@ class App extends Component {
         display.push(<LogIn />);
         break;
       case 'UserFeed':
-        display.push(<Feeling />);
+        display.push(<MoodContainer />);
         break;
     }
+    display.push(<Calendar />);
     display.push(<BottomLinks />);
     return (
       <div>{display}</div>

@@ -9,7 +9,9 @@
 import React from 'react';
 import { Component } from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import { connect } from 'react-redux';
+import '../style.css';
 
 //The main body styling
 const MainDiv = styled.div`
@@ -35,7 +37,7 @@ const SelectStyle = styled.select`
   padding: 20px;
 `;
 
-const SubmitBitton = styled.button`
+const SubmitButton = styled.button`
 margin: auto;
 text-decoration: none;
 border-radius: 20px;
@@ -53,41 +55,51 @@ const mapStateToProps = (reduxState) => {
   };
 };
 
-class Feeling extends Component {
-  constructor(props) {
-    super(props);
+const mapDispatchToProps = (dispatch) => ({
+  moodData: (date, mood) => dispatch(actions.moodData(date, mood)),
+});
 
-    this.state = {
-      response: ''
-    };
+class MoodContainer extends Component {
+  constructor() {
+    super();
+
+    // this.state = {
+    //   response: ''
+    // };
 
     this.sendMood = this.sendMood.bind(this);
   }
 
-  sendMood() {
-    const value = document.getElementById('selector').value;
+  sendMood(e) {
+    e.preventDefault();
+    const mood = e.target[0].value;
+    const date = e.target[1].value;
+    // console.log("sendMood data", mood + " " + date);  
+    this.props.moodData(date, mood);
+    // const value = document.getElementById('selector').value;
 
     const user = {
       username: this.props.username,
-      mood: value
+      mood: mood,
+      date: date,
     };
 
-    fetch('/mood', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({
-          response: data.response
-        });
-      })
-      .catch((err) => {
-        console.log('Error', err);
-      });
+    // fetch('/user/mood', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(user)
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     this.setState({
+    //       response: data.response
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log('Error', err);
+    //   });
   }
 
   render() {
@@ -95,6 +107,7 @@ class Feeling extends Component {
     return (
       <MainDiv>
         <h1>How are you feeling today {cur}?</h1>
+        <form onSubmit={ this.sendMood }>
         <SelectStyle id="selector">
           <option value="happy">Happy</option>
           <option value="sad">Sad</option>
@@ -106,11 +119,13 @@ class Feeling extends Component {
           <option value="distracted">Distracted</option>
         </SelectStyle>
         <br></br>
+        <input type="date" id="date-picker" value={moment().format("YYYY-MM-DD")}></input>
         <br></br>
-        <SubmitBitton onClick={this.sendMood}>submit</SubmitBitton>
+        <SubmitButton>submit</SubmitButton>
+        </form>
         <Response className="return-text">{this.state.response}</Response>
       </MainDiv>
     );
   }
 }
-export default connect(mapStateToProps, null)(Feeling);
+export default connect(mapStateToProps, mapDispatchToProps)(MoodContainer);
