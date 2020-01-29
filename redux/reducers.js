@@ -59,14 +59,15 @@ const userReducers = (state = initialState, action) => {
         response: action.payload,
       };
 
-    default: return state;
-
-    case types.SAVE_QUOTE:
+      case types.SAVE_QUOTE:
       return {
         ...state,
         quote: action.quote,
         author: action.author,
       };
+      
+    default: return state;
+    
   }
 };
 
