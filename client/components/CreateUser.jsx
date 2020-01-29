@@ -31,7 +31,7 @@ const CreateForm = styled.form`
 `;
 
 //Submit button styling
-const SubmitBitton = styled.button`
+const SubmitButton = styled.button`
 margin: auto;
 text-decoration: none;
 border-radius: 20px;
@@ -125,9 +125,9 @@ class CreateUser extends Component {
             ></input>
             <br></br>
             <br></br>
-            <SubmitBitton onClick={this.onFormClick}>
+            <SubmitButton onClick={this.onFormClick}>
               Create Account
-            </SubmitBitton>
+            </SubmitButton>
           </div>
         </CreateForm>
       </MainDiv>

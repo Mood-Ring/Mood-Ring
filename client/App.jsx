@@ -39,22 +39,22 @@ class App extends Component {
 
   render() {
     const display = [];
-    display.push(<MainHeader />);
+    display.push(<MainHeader key='mainheader'/>);
     switch (this.props.page) {
       case 'Home':
-        display.push(<LandingPageBody />);
+        display.push(<LandingPageBody key='landingpagebody'/>);
         break;
       case 'Create':
-        display.push(<CreateUser />);
+        display.push(<CreateUser key='createuser'/>);
         break;
       case 'Login':
-        display.push(<LogIn />);
+        display.push(<LogIn key='login'/>);
         break;
       case 'UserFeed':
-        display.push(<Feeling />);
+        display.push(<Feeling key='feeling'/>);
         break;
     }
-    display.push(<BottomLinks />);
+    display.push(<BottomLinks key='bottomlinks'/>);
     return <div>{display}</div>;
   }
 }
