@@ -1,55 +1,53 @@
 const express = require('express');
 const path = require('path');
+
 const app = express();
-const userController = require('./Controllers/userController');
 const PORT = 3000;
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-app.use(cookieParser())
 
+const userRouter = require('./Routes/userRoutes');
+const apiRouter = require('./Routes/apiRoutes');
+const authRouter = require('./Routes/authRoutes');
 
+app.use(cookieParser());
 app.use(bodyParser.json());
+
+// flow test for incoming requests
+app.use((req, res, next) => {
+  console.log(`
+        ********* FLOW TEST **********
+        MEDTHOD: ${req.method}
+        URL: ${req.url}
+        BODY: ${JSON.stringify(req.body)}
+      `);
+  return next();
+});
 
 app.use('/dist', express.static(path.resolve(__dirname, '../dist/')));
 
 app.get('/', (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
+  res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
 
-// //this is suppose to create our user
-// app.post('/create', userController.createUser, (req, res) => {
-// res.status(200).send(res.locals.user);
-// });
-
-//this is suppose to get our mood.
-
-
-// app.get('/dist', (req, res) => {
-//     res.status(200).sendFile(path.join(__dirname, '../dist/bundle.js'));
-// });
-
-//this is for signup button
-app.post('/signup', userController.createUser, (req, res) => {
-    console.log({"username" : res.locals.user, "password" : res.locals.hash});
-    res.status(200).send({"username" : res.locals.user, "password" : res.locals.hash})
-});
-
-app.post('/login', userController.login, (req, res) => {
-    console.log('in res', res.locals.user)
-    res.status(200).send({username: res.locals.user})
-})
-
-app.post('/mood', userController.moodResponse, (req, res) => {
-  //  console.log('in res', res.locals.user)
-    res.status(200).send({response: res.locals.moodresponse});
-})
+app.use('/user', userRouter);
+app.use('/api', apiRouter);
+app.use('/auth', authRouter);
 
 app.use((err, req, res, next) => {
-    console.log('Global error handler', err);
+  const defaultErr = {
+    log: 'Express error handler caught unknown middleware error',
+    status: 400,
+    message: { err: 'An error occurred' },
+  };
+  const errorObj = { ...defaultErr, ...err };
+  console.log(errorObj.log);
+  console.log(errorObj.message);
+  return res.status(errorObj.status).json(errorObj.message);
 });
 
 app.listen(PORT, () => {
-    console.log("listening on port", PORT);
+  console.log('listening on port', PORT);
 });
 
 

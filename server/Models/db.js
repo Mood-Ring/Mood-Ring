@@ -1,16 +1,31 @@
 const { Pool } = require('pg');
 
-const PG_URI = "postgres://dhiptjdt:q2Z8a6eiLtGcN5C2Vwy6fsl5ZxZjniPH@rajje.db.elephantsql.com:5432/dhiptjdt";
+const userTable = require('./userModel');
+const calendarTable = require('./calendarModel');
 
-//Create New Instance of Pool
+const PG_URI = 'postgres://zhfxpulu:K9N3Umc9sWTSTb1OgM15Obm_TE9WT5bs@rajje.db.elephantsql.com:5432/zhfxpulu';
+
+// Create New Instance of Pool
 const pool = new Pool({
-    connectionString: PG_URI
-  });
+  connectionString: PG_URI,
+});
 
+pool.on('connect', () => {
+  console.log('Connected to the database');
+});
+
+// running our create table(s) queries
+pool.query(userTable, (err) => {
+  if (err) console.log(err);
+});
+
+pool.query(calendarTable, (err) => {
+  if (err) console.log(err);
+});
 
 module.exports = {
-    query: (text, params, callback) => {
-        console.log('executed query', text);
-    return pool.query(text, params, callback);  
-    }
+  query: (text, params, callback) => {
+    console.log('executed query', text);
+    return pool.query(text, params, callback);
+  },
 };
