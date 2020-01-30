@@ -42,6 +42,15 @@ const SubmitButton = styled.button`
   }
 `;
 
+const TitleText = styled.p`
+  text-align: center;
+  width: 100%;
+  margin: 2px;
+  font-family: 'Assistant', sans-serif;
+  font-weight: bold;
+  font-size: 80px;
+`;
+
 const WrongMessage = styled.p`
   color: red;
 `;
@@ -67,9 +76,6 @@ const mapDispatchToProps = (dispatch) => {
     addUser: () => {
       dispatch(actions.addUser());
     },
-    changePage: (index) => {
-      dispatch(actions.changePage(index));
-    }
   };
 };
 
@@ -81,7 +87,8 @@ class LogIn extends Component {
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onFormClick = this.onFormClick.bind(this);
     this.changePage = this.changePage.bind(this);
-
+    this.sendToSignUp = this.sendToSignUp.bind(this);
+    
     this.state = {
       wrong: false
     };
@@ -122,9 +129,15 @@ class LogIn extends Component {
         }
       });
   }
+
   changePage() {
     this.props.history.push('/feeling')  
   }
+
+  sendToSignUp() {
+    this.props.history.push('/signup')
+  }
+
   render() {
     let wrong = [];
     if (this.state.wrong) {
@@ -135,10 +148,10 @@ class LogIn extends Component {
     }
     return (
       <MainDiv>
-        <MainHeader />
+        {/* <TitleText key='titletext' onClick={this.gotToMain}>m☯☯d ring</TitleText> */}
         <LogForm>
           <div>
-            <h1>log in</h1>
+            <h1>Log In</h1>
             <label for="username">username: </label>
             <input
               id="username"
@@ -154,7 +167,8 @@ class LogIn extends Component {
             ></input>
             <br></br>
             <br></br>
-            <SubmitButton onClick={this.changePage}>submit</SubmitButton>
+            <button onClick={this.sendToSignUp}>Create Account</button>
+            <SubmitButton onClick={this.changePage}>Submit</SubmitButton>
             {wrong}
           </div>
         </LogForm>

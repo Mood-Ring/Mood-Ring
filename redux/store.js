@@ -9,6 +9,6 @@ const store = createStore(
   reducers,
   composeWithDevTools(),
 );
-store.dispatch(changePage(0));
+
 console.log('getState', store.getState());
 export default store;

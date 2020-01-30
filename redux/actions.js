@@ -20,12 +20,6 @@ export const addUser = () => ({
   type: types.ADD_USER,
 });
 
-export const changePage = (index) => ({
-  // changePage will take in an index that is sent over via the payload. We'll then use that index to serve the client the specific page they've requested to see
-  type: types.CHANGE_PAGE,
-  payload: index,
-});
-
 // saveResponse will take in the response from our server after we make a post request to our /mood endpoint
 export const saveResponse = (response) => ({
   type: types.SAVE_RESPONSE,

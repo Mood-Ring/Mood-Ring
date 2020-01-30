@@ -4,10 +4,13 @@ import { render } from 'react-dom';
 import LandingPageBody from './components/LandingPageBody.jsx'
 import LogIn from './components/LogIn.jsx'
 import Feeling from './components/HowAreYouFeeling.jsx'
+import CreateUser from './components/CreateUser.jsx'
+import MainHeader from './components/MainHeader.jsx'
 import { Provider } from 'react-redux';
 import store from '../redux/store.js';
 import '../style.css';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
+// import MainHeader from './components/MainHeader.jsx';
 // import createHistory from 'history/createBrowserHistory';
 
 // const history = createHistory()
@@ -18,16 +21,24 @@ render(
         <Link to='/'>Home</Link>
         </a>
         <a>
-        <Link to='/login'>Login</Link>
+        <Link to='/login'>Log In</Link>
         </a>
         <a>
-        <Link to='/feeling'>Feeling</Link>
+        <Link to='/signup'>Sign Up</Link>
+        </a>
+        <a>
+        <Link to='/feeling'>Moods</Link>
+        </a>
+        <a>
+        <Link to='/calendar'>Calendar</Link>
         </a>
        
         <Route exact path='/' component={LandingPageBody} />
         <Route path='/login' component={LogIn} />
+        <Route path='/signup' component={CreateUser} />
         <Route path='/feeling' component ={Feeling} />
-        {/* <Route path="/*" component={() => 'NOT FOUND'} /> */}
+        <Route path='/calendar' component ={MainHeader} />
+        <Route path="/*" component={() => 'NOT FOUND'} />
  
     </Router>
   </Provider>,
