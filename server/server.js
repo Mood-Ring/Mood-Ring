@@ -12,13 +12,11 @@ const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-
 const mongoose = require('mongoose');
 
-const mongoURI = 'mongodb+srv://moodring:moody@moods-ggoun.mongodb.net/test?retryWrites=true&w=majority'
 const userRouter = require('./Routes/userRoutes.js');
 const authRouter = require('./Routes/authRoutes');
-// const apiRouter = require('./Routes/apiRoutes');
+const apiRouter = require('./Routes/apiRoutes');
 
 // max age is in milliseconds
 // our secret will be used to encrypt our cookie when we send to browser
@@ -45,7 +43,6 @@ app.use((req, res, next) => {
   return next();
 });
 
-
 app.use('/dist', express.static(path.resolve(__dirname, '../dist/')));
 
 app.get('/', (req, res) => {
@@ -53,13 +50,13 @@ app.get('/', (req, res) => {
 });
 
 // conncection for externally hosted mongoDB
-mongoose.connect(mongoURI, () => {
+mongoose.connect(process.env.MONGO_URI, () => {
   console.log('connected to mongoDB');
 })
 
 app.use('/user', userRouter);
 app.use('/auth', authRouter);
-// app.use('/api', apiRouter);
+app.use('/api', apiRouter);
 
 
 // golbal error handler for middleware

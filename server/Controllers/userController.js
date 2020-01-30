@@ -22,6 +22,7 @@ userController.createUser = (req, res, next) => {
 
     res.locals.username = req.body.username;
     // db.query to create new user row in User table
+    // eslint-disable-next-line no-unused-vars
     db.query(queryString, values, (error, response) => {
       if (error) {
         return next({
@@ -32,7 +33,7 @@ userController.createUser = (req, res, next) => {
         });
       }
       console.log(`${res.locals.username} successfully created in database`);
-      next();
+      return next();
     });
   });
 };
@@ -71,7 +72,7 @@ userController.login = (req, res, next) => {
         return res.json({ errorMessage: 'Username or password is incorrect' });
       }
       res.locals.username = req.body.username;
-      next();
+      return next();
     });
   });
 };

@@ -1,12 +1,46 @@
-import * as types from '../constants/actionTypes.js';
+import * as types from '../constants/actionTypes';
 
-// ------ ACTIONS
+export function register(username, password) {
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+  };
+  return (dispatch) => fetch('/register', config)
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        type: types.REGISTER,
+        payload: data,
+      });
+    });
+}
 
-export const setUsername = (username) => ({
-  //SET_USERNAME will be triggered when the user submits their username
-  type: types.SET_USERNAME,
-  payload: username
-});
+export function login(username, password) {
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+  };
+  return (dispatch) => fetch('/login', config)
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        type: types.LOGIN,
+        payload: data,
+      });
+    });
+}
 
 export const setPassword = (password) => ({
   //SET_PASSWORD will be triggered when the user submits their password
@@ -48,3 +82,13 @@ export const sendMoodData = (username, date, mood) => (dispatch) => {
     }))
     .catch((err) => console.log(err));
 };
+export function logout() {
+  return (dispatch) => fetch('/logout')
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        type: types.LOGOUT,
+        payload: data,
+      });
+    });
+}

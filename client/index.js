@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
-
-import App from './App.jsx';
 import { Provider } from 'react-redux';
+import App from './App.jsx';
 import store from './store.js';
-import './style.css';
+
+import styles from './style.css';
 
 render(
   <Provider store={store}>

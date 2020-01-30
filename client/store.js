@@ -1,9 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import reducers from './reducers/reducers.js';
-import { changePage } from './actions/actions.js';
+import reducers from './reducers/index';
 
 const store = createStore(reducers, applyMiddleware(thunk));
-store.dispatch(changePage(0));
-console.log('getState', store.getState());
+
 export default store;

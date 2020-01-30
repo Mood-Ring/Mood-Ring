@@ -11,7 +11,7 @@ const MainDiv = styled.div`
   font-family: 'Assistant', sans-serif;
 `;
 
-//The log in form styling
+//The sign up form styling
 const AuthForm = styled.form`
   clear: both;
   text-align: right;
@@ -33,13 +33,13 @@ const SubmitButton = styled.button`
   }
 `;
 
-class Login extends Component {
+class Register extends Component {
   render() {
     return (
       <MainDiv>
-        <AuthForm onSubmit={ this.props.onLogin }>
+        <AuthForm onSubmit={ this.props.onRegister }>
           <div className="center-form">
-            <h1>Log In</h1>
+            <h1>Sign Up</h1>
             <input type="text" placeholder="Username"></input>
             <input type="password" placeholder="Password"></input>
             <SubmitButton>Register</SubmitButton>
@@ -50,4 +50,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Register;

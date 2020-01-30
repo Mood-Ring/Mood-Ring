@@ -123,8 +123,7 @@ class MoodContainer extends Component {
         <br></br>
         <input type="date" id="date-picker" defaultValue={moment().format("YYYY-MM-DD")}></input>
         <br></br>
-        <SubmitButton>submit</SubmitButton>
-        </form>
+        <SubmitButton onClick={this.sendMood}>submit</SubmitButton>
         <Response className="return-text">{this.state.response}</Response>
       </MainDiv>
     );
