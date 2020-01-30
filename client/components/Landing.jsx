@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -63,10 +62,10 @@ class Landing extends Component {
 
   render() {
     return (
-      <div>
-        <nav className="quote">{this.state.quote}</nav>
-        <Link className="button" to="/register">Start Today</Link>
-      </div>
+      <MainDiv>
+        <Quote>{this.state.quote}</Quote>
+        <LoginButton href="/register">Start Today</LoginButton>
+      </MainDiv>
     );
   }
 }

@@ -37,11 +37,14 @@ class Register extends Component {
   render() {
     return (
       <MainDiv>
-        <form className="authForm" onSubmit={ this.props.onRegister }>
-          <input type="text" placeholder="Username"></input>
-          <input type="password" placeholder="Password"></input>
-          <button>Register</button>
-        </form>
+        <AuthForm onSubmit={ this.props.onRegister }>
+          <div className="center-form">
+            <h1>Sign Up</h1>
+            <input type="text" placeholder="Username"></input>
+            <input type="password" placeholder="Password"></input>
+            <SubmitButton>Register</SubmitButton>
+          </div>
+        </AuthForm>
       </MainDiv>
     )
   }

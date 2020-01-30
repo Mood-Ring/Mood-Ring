@@ -36,12 +36,17 @@ const SubmitButton = styled.button`
 class Login extends Component {
   render() {
     return (
-      <form className="login" onSubmit={this.props.onLogin}>
-        <input type="text" placeholder="Username"></input>
-        <input type="password" placeholder="Password"></input>
-        <button>Log In</button>
-      </form>
-    );
+      <MainDiv>
+        <AuthForm onSubmit={ this.props.onLogin }>
+          <div className="center-form">
+            <h1>Log In</h1>
+            <input type="text" placeholder="Username"></input>
+            <input type="password" placeholder="Password"></input>
+            <SubmitButton>Register</SubmitButton>
+          </div>
+        </AuthForm>
+      </MainDiv>
+    )
   }
 }
 

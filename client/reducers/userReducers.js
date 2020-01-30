@@ -1,4 +1,4 @@
-import { REGISTER, LOGIN, LOGOUT, CHANGE_QUOTE } from '../constants/actionTypes';
+import { REGISTER, LOGIN, LOGOUT, } from '../constants/actionTypes';
 
 const initialState = {
   currentUser: '',
