@@ -6,6 +6,7 @@ import LogIn from './components/LogIn.jsx'
 import Feeling from './components/HowAreYouFeeling.jsx'
 import CreateUser from './components/CreateUser.jsx'
 import MainHeader from './components/MainHeader.jsx'
+import MoodContainer from './components/moodContainer.jsx'
 import { Provider } from 'react-redux';
 import store from '../redux/store.js';
 import '../style.css';
@@ -37,8 +38,7 @@ render(
         <Route path='/login' component={LogIn} />
         <Route path='/signup' component={CreateUser} />
         <Route path='/feeling' component ={Feeling} />
-        <Route path='/calendar' component ={MainHeader} />
-        <Route path="/*" component={() => 'NOT FOUND'} />
+        <Route path='/calendar' component ={MoodContainer} />
  
     </Router>
   </Provider>,

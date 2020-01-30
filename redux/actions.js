@@ -31,3 +31,8 @@ export const saveQuote = (quote, author) => ({
   quote,
   author,
 });
+
+export const saveMoods = (moods) => ({
+  type: types.SAVE_MOODS,
+  payload: moods,
+});

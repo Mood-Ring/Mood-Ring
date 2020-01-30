@@ -11,6 +11,8 @@ const initialState = {
   // store quote and author we get back from fetch request to quotes API
   quote: '',
   author: '',
+  // store users moods data we get back from backend here
+  moods: [],
 };
 
 const userReducers = (state = initialState, action) => {
@@ -55,6 +57,11 @@ const userReducers = (state = initialState, action) => {
         author: action.author,
       };
 
+    case types.SAVE_MOODS:
+      return {
+        ...state,
+        moods: action.payload,
+      };
     default: return state;
   }
 };
