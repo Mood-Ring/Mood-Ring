@@ -43,7 +43,7 @@ export const sendMoodData = (username, date, mood) => (dispatch) => {
   fetch('/user/mood', config)
     .then((response) => response.json())
     .then((data) => dispatch({
-      type: types.ADD_MOOD,
+      type: types.GET_MOOD,
       payload: data,
     }))
     .catch((err) => console.log(err));

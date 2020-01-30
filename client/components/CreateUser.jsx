@@ -95,7 +95,7 @@ class CreateUser extends Component {
       username: this.props.username,
       password: this.props.password
     };
-    fetch('/signup', {
+    fetch('/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
