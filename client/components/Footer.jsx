@@ -1,6 +1,6 @@
 /****************************\
 *                            *
-*  Bottom Links: Our Git     *
+*  Footer: Our Git     *
 *  Hub handles that display  *
 *  on the bottom of the page *
 *                            *
@@ -21,7 +21,7 @@ const Link = styled.a`
   color: rgb(208, 209, 236);
 `;
 
-class BottomLinks extends Component {
+class Footer extends Component {
   constructor(props) {
     super(props);
   }
@@ -47,4 +47,4 @@ class BottomLinks extends Component {
   }
 }
 
-export default BottomLinks;
+export default Footer;

@@ -23,15 +23,14 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
+          },
+        },
       },
       {
-        test: /css$/,
-        exclude: /node_modules/,
-        loaders: ['style-loader', 'css-loader']
-      }
-    ]
+        test: /\.css$/,
+        loader: ['style-loader', 'css-loader'],
+      },
+    ],
   },
   devServer: {
     publicPath: '/dist/',

@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-class LandingPageBody extends Component {
+class Landing extends Component {
   constructor(props) {
     super(props);
 
@@ -113,4 +113,4 @@ class LandingPageBody extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LandingPageBody);
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);

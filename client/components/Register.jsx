@@ -1,15 +1,16 @@
 /***************************\
 *                           *
-*  Create User: Page to     *
+*  Register: Page to     *
 *  create a new account     *
 *                           *
 \***************************/
 
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
+// import { Component } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import * as actions from '../actions/actions.js';
+
+// import { connect } from 'react-redux';
+// import * as actions from '../actions/actions.js';
 
 //The main body styling
 const MainDiv = styled.div`
@@ -42,41 +43,41 @@ font-size: 20px;
 }
 `;
 
-const mapStateToProps = (reduxState) => {
-  //used to bring in the pieces of state that the components on this page will use
-  return {
-    username: reduxState.username,
-    password: reduxState.password,
-    currentUser: reduxState.currentUser
-  };
-};
+// const mapStateToProps = (reduxState) => {
+//   //used to bring in the pieces of state that the components on this page will use
+//   return {
+//     username: reduxState.username,
+//     password: reduxState.password,
+//     currentUser: reduxState.currentUser
+//   };
+// };
 
-const mapDispatchToProps = (dispatch) => {
-  //used to bring in actions that will be dispatched within the components on this page.
-  return {
-    setUsername: (userN) => {
-      dispatch(actions.setUsername(userN));
-    },
-    setPassword: (password) => {
-      dispatch(actions.setPassword(password));
-    },
-    addUser: () => {
-      dispatch(actions.addUser());
-    },
-    changePage: (index) => {
-      dispatch(actions.changePage(index));
-    }
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   //used to bring in actions that will be dispatched within the components on this page.
+//   return {
+//     setUsername: (userN) => {
+//       dispatch(actions.setUsername(userN));
+//     },
+//     setPassword: (password) => {
+//       dispatch(actions.setPassword(password));
+//     },
+//     addUser: () => {
+//       dispatch(actions.addUser());
+//     },
+//     changePage: (index) => {
+//       dispatch(actions.changePage(index));
+//     }
+//   };
+// };
 
-class CreateUser extends Component {
-  constructor(props) {
-    super(props);
+class Register extends Component {
+  // constructor(props) {
+  //   super(props);
 
-    this.onUserNameChange = this.onUserNameChange.bind(this);
-    this.onPasswordChange = this.onPasswordChange.bind(this);
-    this.onFormClick = this.onFormClick.bind(this);
-  }
+  //   this.onUserNameChange = this.onUserNameChange.bind(this);
+  //   this.onPasswordChange = this.onPasswordChange.bind(this);
+  //   this.onFormClick = this.onFormClick.bind(this);
+  // }
 
   onUserNameChange() {
     const value = document.getElementById('username').value;
@@ -135,4 +136,4 @@ class CreateUser extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

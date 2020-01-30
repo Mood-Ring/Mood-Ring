@@ -1,6 +1,6 @@
 /***************************\
 *                           *
-*  Log In: The Log in Page! *
+*  Login: The Log in Page! *
 *                           *
 \***************************/
 
@@ -72,7 +72,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-class LogIn extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -160,4 +160,4 @@ class LogIn extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogIn);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
