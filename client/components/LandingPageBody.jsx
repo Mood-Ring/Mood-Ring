@@ -41,6 +41,13 @@ const LoginButton = styled.button`
     outline: none;
   }
 `;
+const TitleText = styled.p`
+  text-align: center;
+  margin: 2px;
+  font-family: 'Assistant', sans-serif;
+  font-weight: bold;
+  font-size: 80px;
+`;
 
 const mapStateToProps = (reduxState) => {
   //used to bring in the pieces of state that the components on this page will use
@@ -54,9 +61,6 @@ const mapStateToProps = (reduxState) => {
 const mapDispatchToProps = (dispatch) => {
   //used to bring in actions that will be dispatched within the components on this page.
   return {
-    changePage: (index) => {
-      dispatch(actions.changePage(index));
-    },
     saveQuote: (quote, author) => {
       dispatch(actions.saveQuote(quote, author))
     }
@@ -100,7 +104,7 @@ class LandingPageBody extends Component {
 
     return (
       <MainDiv>
-        <MainHeader />
+        <TitleText key='titletext' onClick={this.gotToMain}>m☯☯d ring</TitleText>
         {quoteComp}
         <br></br>
         <LoginButton className="start-today" onClick={this.changePage}>

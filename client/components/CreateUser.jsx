@@ -63,9 +63,6 @@ const mapDispatchToProps = (dispatch) => {
     addUser: () => {
       dispatch(actions.addUser());
     },
-    changePage: (index) => {
-      dispatch(actions.changePage(index));
-    }
   };
 };
 
@@ -90,6 +87,7 @@ class CreateUser extends Component {
 
   onFormClick(e) {
     e.preventDefault();
+    this.props.history.push('/login')
     this.props.addUser();
     const user = {
       username: this.props.username,
@@ -101,8 +99,10 @@ class CreateUser extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(user)
+
+      
     });
-    this.props.changePage(2);
+
   }
   render() {
     return (

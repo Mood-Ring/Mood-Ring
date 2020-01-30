@@ -48,6 +48,14 @@ font-size: 20px;
 }
 `;
 
+const TitleText = styled.p`
+  text-align: center;
+  margin: 2px;
+  font-family: 'Assistant', sans-serif;
+  font-weight: bold;
+  font-size: 80px;
+`;
+
 const mapStateToProps = (reduxState) => {
   //used to bring in the pieces of state that the components on this page will use
   return {
@@ -68,6 +76,7 @@ class Feeling extends Component {
   constructor(props) {
     super(props);
     this.sendMood = this.sendMood.bind(this);
+    this.routeToCalendar = this.routeToCalendar.bind(this);
   }
 
   sendMood() {
@@ -94,11 +103,16 @@ class Feeling extends Component {
         console.log('Error', err);
       });
   }
+  
+  routeToCalendar() {
+    this.props.history.push('/calendar')
+  }
 
   render() {
     const cur = this.props.currentUser;
     return (
       <MainDiv>
+        <TitleText key='titletext' onClick={this.gotToMain}>m☯☯d ring</TitleText>
         <h1>How are you feeling today {cur}?</h1>
         <SelectStyle id="selector">
           <option value="happy">Happy</option>
@@ -114,6 +128,7 @@ class Feeling extends Component {
         <br></br>
         <SubmitButton onClick={this.sendMood}>submit</SubmitButton>
         <Response className="return-text">{this.props.response}</Response>
+        <button onClick={this.routeToCalendar}>View your Mood Calendar</button>
       </MainDiv>
     );
   }

@@ -41,62 +41,33 @@ const LoginButton = styled.button`
   }
 `;
 
-const mapStateToProps = (reduxState) => {
-  //used to bring in the pieces of state that the components on this page will use
-  return {
-    page: reduxState.page
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  //used to bring in actions that will be dispatched within the components on this page.
-  return {
-    changePage: (index) => {
-      dispatch(actions.changePage(index));
-    }
-  };
-};
 
 class MainHeader extends Component {
   constructor(props) {
     super(props);
 
-    this.gotToLogin = this.gotToLogin.bind(this);
-    this.gotToCreate = this.gotToCreate.bind(this);
-    this.gotToMain = this.gotToMain.bind(this);
   }
 
-  gotToLogin() {
-    this.props.changePage(1);
-  }
-
-  gotToCreate() {
-    this.props.changePage(3);
-  }
-
-  gotToMain() {
-    this.props.changePage(0);
-  }
   render() {
-    console.log('Page in header:', this.props.page);
-    const headerArray = [];
-    if (this.props.page != 'UserFeed') {
-      if (this.props.page != 'Login')
-        headerArray.push(
-          <LoginButton key='login' href="" onClick={this.gotToLogin}>
-            Log in
-          </LoginButton>
-        );
-      if (this.props.page != 'Create')
-        headerArray.push(
-          <LoginButton key='create' href="" onClick={this.gotToCreate}>
-            Sign up
-          </LoginButton>
-        );
-    }
-    headerArray.push(<TitleText key='titletext' onClick={this.gotToMain}>m☯☯d ring</TitleText>);
-    return <MainDiv>{headerArray}</MainDiv>;
+    // console.log('Page in header:', this.props.page);
+    // const headerArray = [];
+    // if (this.props.page != 'UserFeed') {
+    //   if (this.props.page != 'Login')
+    //     headerArray.push(
+    //       <LoginButton key='login' href="" onClick={this.gotToLogin}>
+    //         Log in
+    //       </LoginButton>
+    //     );
+    //   if (this.props.page != 'Create')
+    //     headerArray.push(
+    //       <LoginButton key='create' href="" onClick={this.gotToCreate}>
+    //         Sign up
+    //       </LoginButton>
+    //     );
+    // }
+    // headerArray.push(<TitleText key='titletext' onClick={this.gotToMain}>m☯☯d ring</TitleText>);
+    return <TitleText key='titletext' onClick={this.gotToMain}>m☯☯d ring</TitleText>;
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);
+export default MainHeader;
