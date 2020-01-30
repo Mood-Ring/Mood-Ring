@@ -35,7 +35,7 @@ const SelectStyle = styled.select`
   padding: 20px;
 `;
 
-const SubmitBitton = styled.button`
+const SubmitButton = styled.button`
 margin: auto;
 text-decoration: none;
 border-radius: 20px;
@@ -53,7 +53,7 @@ const mapStateToProps = (reduxState) => {
   };
 };
 
-class Feeling extends Component {
+class MoodContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -107,10 +107,10 @@ class Feeling extends Component {
         </SelectStyle>
         <br></br>
         <br></br>
-        <SubmitBitton onClick={this.sendMood}>submit</SubmitBitton>
+        <SubmitButton onClick={this.sendMood}>submit</SubmitButton>
         <Response className="return-text">{this.state.response}</Response>
       </MainDiv>
     );
   }
 }
-export default connect(mapStateToProps, null)(Feeling);
+export default connect(mapStateToProps, null)(MoodContainer);
