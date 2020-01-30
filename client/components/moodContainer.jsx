@@ -43,6 +43,15 @@ class MoodContainer extends Component {
     render() {
       const moodArray = [];
       const moodz = this.props.moods
+      for (let i = 0; i<moodz.length;i+=1) {
+        moodz[i].created_date = moodz[i].created_date.slice(0,10);
+      }
+      moodz.sort((a,b) => {
+        if (a.created_date < b.created_date) return -1;
+        if (a.created_date > b.created_date) return 1;
+        return 0;
+      });
+      console.log("Ordered:", moodz);
       for (let i = 0; i < moodz.length; i += 1) {
         moodArray.push(<MoodDisplay date={moodz[i].created_date} mood={moodz[i].mood}></MoodDisplay>);
       }
