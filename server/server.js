@@ -15,7 +15,7 @@ const cookieParser = require('cookie-parser');
 
 const mongoose = require('mongoose');
 
-const mongoURI = 'mongodb+srv://moodring:moody@moods-ggoun.mongodb.net/test?retryWrites=true&w=majority'
+const mongoURI = process.env.MONGO_URI;
 const userRouter = require('./Routes/userRoutes.js');
 const authRouter = require('./Routes/authRoutes');
 // const apiRouter = require('./Routes/apiRoutes');
