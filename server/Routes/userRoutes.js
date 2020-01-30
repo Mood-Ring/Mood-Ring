@@ -6,7 +6,7 @@ const userController = require('../Controllers/userController.js');
 const moodController = require('../Controllers/moodController');
 
 // functionality for creating a new user and storing user in database
-router.post('/signup', userController.createUser, (req, res) => res.status(200).json({ username: res.locals.username }));
+router.post('/register', userController.createUser, (req, res) => res.status(200).json({ username: res.locals.username }));
 
 // funcionality for logging in without oauth
 router.post('/login', userController.login, (req, res) => res.status(200).json({ username: res.locals.username }));

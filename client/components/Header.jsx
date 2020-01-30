@@ -1,20 +1,6 @@
-/** *************************
-*
-*  Header: The header
-*  for every page on the
-*  site.
-*
-************************** */
-
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
-
-// Nat note--remove css styling @ end & add separate style sheets?
 import styled from 'styled-components';
-
-// import { connect } from 'react-redux';
-// import * as actions from '../actions/actions.js';
 
 // Styling for the whole header
 const MainDiv = styled.div`
@@ -23,7 +9,6 @@ const MainDiv = styled.div`
 `;
 
 // Styling for the 'Mood-Ring' title
-
 const TitleText = styled.p`
   text-align: center;
   margin: 2px;
@@ -33,7 +18,7 @@ const TitleText = styled.p`
 `;
 
 // Styling for the Log In button
-const LoginButton = styled.button`
+const AuthButton = styled.button`
   text-decoration: none;
   font-family: 'Assistant', sans-serif;
   border-radius: 20px;
@@ -50,77 +35,19 @@ class Header extends Component {
     const { loggedIn } = this.props;
     return (
       !loggedIn ? (
-        <nav className="header">
-          <Link className="button" to="/signup">Register</Link>
-          <Link className="button" to="/login">Login</Link>
-        </nav>
+        <MainDiv>
+          <AuthButton href="/register">Register</AuthButton>
+          <AuthButton href="/login">Login</AuthButton>
+          <TitleText>m☯☯d ring</TitleText>
+        </MainDiv>
         ) : (
-        <nav className="header">
-          <Link className="button" to="/logout" onClick={this.props.onLogout}>Logout</Link>
-        </nav>
+        <MainDiv>
+          <AuthButton href="/logout">Logout</AuthButton>
+          <TitleText>m☯☯d ring 2.0</TitleText>
+        </MainDiv>
         )
     )
   }
 }
 
-// const mapStateToProps = (reduxState) => {
-//   //used to bring in the pieces of state that the components on this page will use
-//   return {
-//     page: reduxState.page
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//   //used to bring in actions that will be dispatched within the components on this page.
-//   return {
-//     changePage: (index) => {
-//       dispatch(actions.changePage(index));
-//     }
-//   };
-// };
-
-// class Header extends Component {
-//   constructor(props) {
-//     console.log("Props: ", props);
-//     super(props);
-
-//     this.gotToLogin = this.gotToLogin.bind(this);
-//     this.gotToCreate = this.gotToCreate.bind(this);
-//     this.gotToMain = this.gotToMain.bind(this);
-//   }
-
-//   gotToLogin() {
-//     this.props.changePage(1);
-//   }
-
-//   gotToCreate() {
-//     this.props.changePage(3);
-//   }
-
-//   gotToMain() {
-//     this.props.changePage(0);
-//   }
-//   render() {
-//     console.log('Page in header:', this.props.page);
-//     const headerArray = [];
-//     if (this.props.page != 'UserFeed') {
-//       if (this.props.page != 'Login')
-//         headerArray.push(
-//           <LoginButton href="" onClick={this.gotToLogin}>
-//             Log in
-//           </LoginButton>
-//         );
-//       if (this.props.page != 'Create')
-//         headerArray.push(
-//           <LoginButton href="" onClick={this.gotToCreate}>
-//             Sign up
-//           </LoginButton>
-//         );
-//     }
-//     headerArray.push(<TitleText onClick={this.gotToMain}>m☯☯d ring (2.0)</TitleText>);
-//     return <MainDiv>{headerArray}</MainDiv>;
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Header);
 export default Header;

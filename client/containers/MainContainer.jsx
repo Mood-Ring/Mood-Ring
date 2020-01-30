@@ -10,89 +10,53 @@ import * as actions from '../actions/actions.js';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
-  //used to bring in the pieces of state that the components on this page will use
   return {
     loggedIn: state.userState.loggedIn,
     currentUser: state.userState.currentUser,
-    // page: state.page,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-//   //used to bring in actions that will be dispatched within the components on this page.
-//   return {
-//     changePage: (index) => {
-//       dispatch(actions.changePage(index));
-//     }
-//   };
-  addUser: (username, password) => dispatch(actions.addUser(username, password)),
+  register: (username, password) => dispatch(actions.register(username, password)),
   login: (username, password) => dispatch(actions.login(username, password)),
   logout: () => dispatch(actions.logout()),
 });
 
 class MainContainer extends Component {
-//   constructor(props) {
-//     super(props);
-//   }
-
-//   componentDidMount() {
-//     //changePage(0) serves the homepage for the app
-//     this.props.changePage(0);
-//   }
-  
   constructor() {
     super();
-    this.onAddUser = this.onAddUser.bind(this);
+    this.onRegister = this.onRegister.bind(this);
     this.onLogin = this.onLogin.bind(this);
     this.onLogout = this.onLogout.bind(this);
   }
-  onAddUser(e) {
+  onRegister(e) {
+    e.preventDefault();
     const username = e.target[0].value;
     const password = e.target[1].value;
-    this.props.addUser(username, password);
+    this.props.Register(username, password);
   }
   onLogin(e) {
+    e.preventDefault();
     const username = e.target[0].value;
     const password = e.target[1].value;
     this.props.login(username, password);
   }
   onLogout(e) {
+    e.preventDefault();
     this.props.logout();
   }
 
   render() {
     return (
         <Router>
-            <Header loggedIn={ this.props.loggedIn }/>
-            <Route exact path="/user/signup" component={Register} />
-            <Route exact path="/user/login" component={Login} />
-            <Route exact path="/" component={Landing} />
+            <Header onLogout={ this.onLogout } loggedIn={ this.props.loggedIn }/>
+            <Route exact path="/user/register" render={() => <Register onRegister={ this.onRegister }/> } />
+            <Route exact path="/user/login" render={() => <Login onLogin={ this.onLogin }/> } />
+            <Route exact path="/" render={() => <Landing onChangeQuote={this.onChangeQuote} quoteRandom={ this.props.quoteRandom }/> } />
             <Route exact path="/mood" component={MoodContainer} />
             <Footer />
         </Router>
     )
-
-    // const display = [];
-    // display.push(<Header />);
-    // switch (this.props.page) {
-    //   case 'Home':
-    //     display.push(<Landing />);
-    //     break;
-    //   case 'Create':
-    //     display.push(<Register />);
-    //     break;
-    //   case 'Login':
-    //     display.push(<Login />);
-    //     break;
-    //   case 'UserFeed':
-    //     display.push(<Feeling />);
-    //     break;
-    // }
-    // display.push(<Footer />);
-    // return (
-    //   <div>{display}</div>
-    // )
-
   }
 }
 
