@@ -110,7 +110,7 @@ class LogIn extends Component {
     })
       .then((response) => response.json())
       .then((res) => {
-        if (res.username == 'User name or password is wrong') {
+        if (res.success == false) {
           this.setState({
             wrong: true
           });
@@ -149,7 +149,7 @@ class LogIn extends Component {
             ></input>
             <br></br>
             <br></br>
-            <SubmitBitton onClick={this.onFormClick}>submit</SubmitBitton>
+            <SubmitBitton onClick={this.onFormClick}>log in</SubmitBitton>
             {wrong}
           </div>
         </LogForm>
