@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const userTable = require('./userModel');
 const calendarTable = require('./calendarModel');
 
-const PG_URI = process.env.PG_URI;
+const { PG_URI } = process.env;
 
 // Create New Instance of Pool
 const pool = new Pool({
