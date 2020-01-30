@@ -153,6 +153,8 @@ class Login extends Component {
             {wrong}
           </div>
         </LogForm>
+        <a href="/auth/google">Google Button</a>
+        <a href="/auth/spotify">Spotify Button</a>
       </MainDiv>
     );
   }
