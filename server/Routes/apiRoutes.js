@@ -1,5 +1,10 @@
-// const express = require('express');
+const express = require('express');
 
-// const router = express.Router();
+const router = express.Router();
+const apiController = require('../Controllers/apiController');
 
-// module.exports = router;
+router.post('/images', apiController.getImages, (req, res) => {
+  return res.status(200).json(res.locals.images);
+});
+
+module.exports = router;
