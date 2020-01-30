@@ -24,11 +24,11 @@ const MainDiv = styled.div`
   font-family: 'Assistant', sans-serif;
 `;
 
-// const Response = styled.div`
-//   width: 100%;
-//   height: 20%;
-//   text-align: center;
-// `;
+const Response = styled.div`
+  width: 100%;
+  height: 20%;
+  text-align: center;
+`;
 
 const SelectStyle = styled.select`
   font-family: 'Assistant', sans-serif;
@@ -54,8 +54,6 @@ const mapStateToProps = (reduxState) => {
   //used to bring in the pieces of state that the components on this page will use
   return {
     currentUser: reduxState.currentUser,
-    // date: reduxState.mood.date,
-    // mood: reduxState.mood.mood,
   };
 };
 
@@ -67,9 +65,9 @@ class MoodContainer extends Component {
   constructor() {
     super();
 
-    // this.state = {
-    //   response: ''
-    // };
+    this.state = {
+      response: ''
+    };
 
     this.moodDataSubmit = this.moodDataSubmit.bind(this);
   }
@@ -82,28 +80,28 @@ class MoodContainer extends Component {
     this.props.sendMoodData(username, date, mood);
     // const value = document.getElementById('selector').value;
 
-    // const user = {
-    //   username: this.props.username,
-    //   mood: mood,
-    //   date: date,
-    // };
+    const user = {
+      username: this.props.username,
+      mood: mood,
+      date: date,
+    };
 
-    // fetch('/user/mood', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(user)
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     this.setState({
-    //       response: data.response
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log('Error', err);
-    //   });
+    fetch('/user/mood', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({
+          response: data.response
+        });
+      })
+      .catch((err) => {
+        console.log('Error', err);
+      });
   }
 
   render() {
@@ -127,7 +125,7 @@ class MoodContainer extends Component {
         <br></br>
         <SubmitButton>submit</SubmitButton>
         </form>
-        {/* <Response className="return-text">{this.state.response}</Response> */}
+        <Response className="return-text">{this.state.response}</Response>
       </MainDiv>
     );
   }

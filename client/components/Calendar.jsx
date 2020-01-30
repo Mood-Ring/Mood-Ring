@@ -5,6 +5,7 @@ class Calendar extends Component {
   render () {
     return (
       <div>
+        {/* will have calendarItem component */}
         <p>hello</p>
       </div>
     );
