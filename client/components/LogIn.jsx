@@ -101,7 +101,7 @@ class LogIn extends Component {
       username: this.props.username,
       password: this.props.password
     };
-    fetch('/user/login', {
+    fetch('/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

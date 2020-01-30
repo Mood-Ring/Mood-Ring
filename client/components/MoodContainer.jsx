@@ -24,11 +24,11 @@ const MainDiv = styled.div`
   font-family: 'Assistant', sans-serif;
 `;
 
-const Response = styled.div`
-  width: 100%;
-  height: 20%;
-  text-align: center;
-`;
+// const Response = styled.div`
+//   width: 100%;
+//   height: 20%;
+//   text-align: center;
+// `;
 
 const SelectStyle = styled.select`
   font-family: 'Assistant', sans-serif;
@@ -54,6 +54,8 @@ const mapStateToProps = (reduxState) => {
   //used to bring in the pieces of state that the components on this page will use
   return {
     currentUser: reduxState.currentUser,
+    // date: reduxState.mood.date,
+    // mood: reduxState.mood.mood,
   };
 };
 
@@ -65,9 +67,9 @@ class MoodContainer extends Component {
   constructor() {
     super();
 
-    this.state = {
-      response: ''
-    };
+    // this.state = {
+    //   response: ''
+    // };
 
     this.moodDataSubmit = this.moodDataSubmit.bind(this);
   }
@@ -78,34 +80,33 @@ class MoodContainer extends Component {
     const mood = e.target[0].value;
     const date = e.target[1].value;
     this.props.sendMoodData(username, date, mood);
-    const value = document.getElementById('selector').value;
+    // const value = document.getElementById('selector').value;
 
-    const user = {
-      username: this.props.username,
-      mood: mood,
-      date: date,
-    };
+    // const user = {
+    //   username: this.props.username,
+    //   mood: mood,
+    //   date: date,
+    // };
 
-    fetch('/user/mood', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(username)
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({
-          response: data.response
-        });
-      })
-      .catch((err) => {
-        console.log('Error', err);
-      });
+    // fetch('/user/mood', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(user)
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     this.setState({
+    //       response: data.response
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log('Error', err);
+    //   });
   }
 
   render() {
-    console.log("this.props after submit ", this.props);
     const cur = this.props.currentUser;
     return (
       <MainDiv>
@@ -126,7 +127,7 @@ class MoodContainer extends Component {
         <br></br>
         <SubmitButton>submit</SubmitButton>
         </form>
-        <Response className="return-text">{ this.state.mood }</Response>
+        {/* <Response className="return-text">{this.state.response}</Response> */}
       </MainDiv>
     );
   }
