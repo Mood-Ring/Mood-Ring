@@ -12,7 +12,7 @@ const MainDiv = styled.div`
 `;
 
 //The sign up form styling
-const CreateForm = styled.form`
+const AuthForm = styled.form`
   clear: both;
   text-align: right;
   width: 50%;
@@ -36,11 +36,13 @@ const SubmitButton = styled.button`
 class Register extends Component {
   render() {
     return (
-      <form className="register" onSubmit={ this.props.onRegister }>
-        <input type="text" placeholder="Username"></input>
-        <input type="password" placeholder="Password"></input>
-        <button>Register</button>
-      </form>
+      <MainDiv>
+        <form className="authForm" onSubmit={ this.props.onRegister }>
+          <input type="text" placeholder="Username"></input>
+          <input type="password" placeholder="Password"></input>
+          <button>Register</button>
+        </form>
+      </MainDiv>
     )
   }
 }

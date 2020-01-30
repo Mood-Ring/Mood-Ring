@@ -12,7 +12,7 @@ const MainDiv = styled.div`
 `;
 
 //The log in form styling
-const LogForm = styled.form`
+const AuthForm = styled.form`
   clear: both;
   text-align: right;
   width: 50%;

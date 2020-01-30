@@ -19,7 +19,7 @@ const TitleText = styled.p`
 `;
 
 // Styling for the Log In button
-const LoginButton = styled.button`
+const AuthButton = styled.button`
   text-decoration: none;
   font-family: 'Assistant', sans-serif;
   border-radius: 20px;
@@ -36,14 +36,16 @@ class Header extends Component {
     const { loggedIn } = this.props;
     return (
       !loggedIn ? (
-        <nav className="header">
-          <Link className="button" to="/register">Register</Link>
-          <Link className="button" to="/login">Login</Link>
-        </nav>
+        <MainDiv>
+          <AuthButton href="/register">Register</AuthButton>
+          <AuthButton href="/login">Login</AuthButton>
+          <TitleText>m☯☯d ring</TitleText>
+        </MainDiv>
         ) : (
-        <nav className="header">
-          <Link className="button" to="/logout" onClick={this.props.onLogout}>Logout</Link>
-        </nav>
+        <MainDiv>
+          <AuthButton href="/logout">Logout</AuthButton>
+          <TitleText>m☯☯d ring 2.0</TitleText>
+        </MainDiv>
         )
     )
   }
