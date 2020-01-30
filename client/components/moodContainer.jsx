@@ -27,7 +27,7 @@ class MoodContainer extends Component {
       .then(response => response.json())
       .then(response => {
           for (let i = 0; i<response.length;i+=1) {
-              moodArray.push(<MoodDisplay date={response[i].date} mood={response[i].mood}></MoodDisplay>);
+              moodArray.push(<MoodDisplay date={response[i].created_date} mood={response[i].mood}></MoodDisplay>);
           }
       })
       .catch(err => console.log(err))
