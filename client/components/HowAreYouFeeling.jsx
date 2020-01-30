@@ -60,7 +60,8 @@ const mapStateToProps = (reduxState) => {
   //used to bring in the pieces of state that the components on this page will use
   return {
     currentUser: reduxState.currentUser,
-    response: reduxState.response
+    response: reduxState.response,
+    username: reduxState.username
   };
 };
 
@@ -77,6 +78,24 @@ class Feeling extends Component {
     super(props);
     this.sendMood = this.sendMood.bind(this);
     this.routeToCalendar = this.routeToCalendar.bind(this);
+  }
+
+  componentDidMount() {
+    const ourObj = { username: this.props.username }
+    fetch('/getUserMoods', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(ourObj)
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('thisisourDATA', data)
+    }).catch(err=>{
+      console.log('hitting error')
+      console.log(err)
+    });
   }
 
   sendMood() {
