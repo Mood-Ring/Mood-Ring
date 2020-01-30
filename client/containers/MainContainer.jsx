@@ -53,7 +53,7 @@ class MainContainer extends Component {
             <Route exact path="/user/register" render={() => <Register onRegister={ this.onRegister }/> } />
             <Route exact path="/user/login" render={() => <Login onLogin={ this.onLogin }/> } />
             <Route exact path="/" render={() => <Landing onChangeQuote={this.onChangeQuote} quoteRandom={ this.props.quoteRandom }/> } />
-            <Route exact path="/mood" component={MoodContainer} />
+            <Route exact path="/user/mood" component={MoodContainer} />
             <Footer />
         </Router>
     )
