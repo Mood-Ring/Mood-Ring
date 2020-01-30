@@ -11,6 +11,8 @@ import { Component } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import { connect } from 'react-redux';
+import * as actions from '../actions/actions.js';
+
 import '../style.css';
 
 //The main body styling
@@ -22,11 +24,11 @@ const MainDiv = styled.div`
   font-family: 'Assistant', sans-serif;
 `;
 
-const Response = styled.div`
-  width: 100%;
-  height: 20%;
-  text-align: center;
-`;
+// const Response = styled.div`
+//   width: 100%;
+//   height: 20%;
+//   text-align: center;
+// `;
 
 const SelectStyle = styled.select`
   font-family: 'Assistant', sans-serif;
@@ -51,12 +53,14 @@ font-size: 20px;
 const mapStateToProps = (reduxState) => {
   //used to bring in the pieces of state that the components on this page will use
   return {
-    currentUser: reduxState.currentUser
+    currentUser: reduxState.currentUser,
+    // date: reduxState.mood.date,
+    // mood: reduxState.mood.mood,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  moodData: (date, mood) => dispatch(actions.moodData(date, mood)),
+  sendMoodData: (username, date, mood) => dispatch(actions.sendMoodData(username, date, mood)),
 });
 
 class MoodContainer extends Component {
@@ -67,22 +71,22 @@ class MoodContainer extends Component {
     //   response: ''
     // };
 
-    this.sendMood = this.sendMood.bind(this);
+    this.moodDataSubmit = this.moodDataSubmit.bind(this);
   }
 
-  sendMood(e) {
+  moodDataSubmit(e) {
     e.preventDefault();
+    const username = this.props.currentUser;
     const mood = e.target[0].value;
     const date = e.target[1].value;
-    // console.log("sendMood data", mood + " " + date);  
-    this.props.moodData(date, mood);
+    this.props.sendMoodData(username, date, mood);
     // const value = document.getElementById('selector').value;
 
-    const user = {
-      username: this.props.username,
-      mood: mood,
-      date: date,
-    };
+    // const user = {
+    //   username: this.props.username,
+    //   mood: mood,
+    //   date: date,
+    // };
 
     // fetch('/user/mood', {
     //   method: 'POST',
@@ -107,7 +111,7 @@ class MoodContainer extends Component {
     return (
       <MainDiv>
         <h1>How are you feeling today {cur}?</h1>
-        <form onSubmit={ this.sendMood }>
+        <form className="mood" onSubmit={ this.moodDataSubmit }>
         <SelectStyle id="selector">
           <option value="happy">Happy</option>
           <option value="sad">Sad</option>
@@ -119,11 +123,11 @@ class MoodContainer extends Component {
           <option value="distracted">Distracted</option>
         </SelectStyle>
         <br></br>
-        <input type="date" id="date-picker" value={moment().format("YYYY-MM-DD")}></input>
+        <input type="date" id="date-picker" defaultValue={moment().format("YYYY-MM-DD")}></input>
         <br></br>
         <SubmitButton>submit</SubmitButton>
         </form>
-        <Response className="return-text">{this.state.response}</Response>
+        {/* <Response className="return-text">{this.state.response}</Response> */}
       </MainDiv>
     );
   }

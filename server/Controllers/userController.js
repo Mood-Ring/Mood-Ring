@@ -90,6 +90,7 @@ userController.login = (req, res, next) => {
 
 //retreives a mood response for input mood
 userController.moodResponse = (req, res, next) => {
+    console.log("req.body mood " req.body);
     const mood = req.body.mood;
     
     //will query an a array @ respose.rows that will have all the moodResponses @mood selected

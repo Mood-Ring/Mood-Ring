@@ -28,13 +28,14 @@ export const changePage = (index) => ({
 
 /* MOOD DATA */
 
-export const addressSearch = (date, mood) => (dispatch) => {
+export const sendMoodData = (username, date, mood) => (dispatch) => {
   const config = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
+      username,
       date,
       mood,
     }),
@@ -42,11 +43,8 @@ export const addressSearch = (date, mood) => (dispatch) => {
   fetch('/user/mood', config)
     .then((response) => response.json())
     .then((data) => dispatch({
-      type: types.SEARCH_ADDRESS,
-      payload: {
-        address_search: `${address} ${borough}`,
-        current_results: data,
-      },
+      type: types.ADD_MOOD,
+      payload: data,
     }))
     .catch((err) => console.log(err));
 };
