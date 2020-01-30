@@ -36,8 +36,8 @@ class Header extends Component {
     return (
       !loggedIn ? (
         <MainDiv>
-          <AuthButton href="/register">Register</AuthButton>
-          <AuthButton href="/login">Login</AuthButton>
+          <AuthButton href="/user/register">Register</AuthButton>
+          <AuthButton href="/user/login">Login</AuthButton>
           <TitleText>m☯☯d ring</TitleText>
         </MainDiv>
         ) : (
