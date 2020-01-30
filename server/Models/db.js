@@ -3,9 +3,11 @@ const { Pool } = require('pg');
 const userTable = require('./userModel');
 const calendarTable = require('./calendarModel');
 
+const { PG_URI } = process.env;
+
 // Create New Instance of Pool
 const pool = new Pool({
-  connectionString: process.env.PG_URI,
+  connectionString: PG_URI,
 });
 
 pool.on('connect', () => {
