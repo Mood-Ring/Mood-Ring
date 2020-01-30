@@ -6,7 +6,10 @@ const saltRounds = 10;
 
 const userController = {};
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2c22dd4745916de5c90805a22d1887175ed9d12e
 userController.createUser = (req, res, next) => {
   // will use bcrypt hash to create a hashed password
 
@@ -81,6 +84,7 @@ userController.createUser = (req, res, next) => {
 };
 
 userController.login = (req, res, next) => {
+<<<<<<< HEAD
   // compare hash with saved hash
   // convert to values-array format
 
@@ -118,8 +122,54 @@ userController.login = (req, res, next) => {
     })
     .catch((errd) => console.log(errd, 'Error or Username or Password is wrong'));
 };
+=======
+    // Will use bcrypt compare to successfully login a user
 
+    const { username, password } = req.body;
+    const checkUserString = 'SELECT * FROM customer WHERE username=$1';
+    const checkUserValue = [username];
 
+    db.query(checkUserString, checkUserValue)
+        .then(response => {
+            // if no user exists redirect to login 
+            if (!response.rows[0]) {
+                res.send({ success: false });
+                return next();
+            }
+
+            // get the hashedpw back from the database
+            const { hashedpw } = response.rows[0];
+
+            // { username: "User name or password is wrong" }
+
+            // use bcrypt.compare to compare the passwor
+            bcrypt.compare(password, hashedpw)
+                .then(bcryptRes => {
+                    // response we get back will be a boolean
+                    if (!bcryptRes) {
+                        res.locals.bcryptSuccess = {
+                            success: bcryptRes,
+                        }
+                        res.locals.username = username;
+                        return next();
+                    }
+                    res.locals.bcryptSuccess = {
+                        success: true
+                    };
+                    return next();
+                })
+                .catch(err => next(err));
+        })
+        .catch(err => next(err));
+}
+>>>>>>> 2c22dd4745916de5c90805a22d1887175ed9d12e
+
+userController.getMoodResponse = (req, res, next) => {
+    // this middleware will retrieve a random moodresponse in the database
+    const { mood } = req.body;
+    const getMoodResponseString = 'SELECT moodresponse from mood WHERE currentMood=$1';
+
+<<<<<<< HEAD
 // retreives a mood response for input mood
 userController.moodResponse = (req, res, next) => {
   const { mood } = req.body;
@@ -141,10 +191,27 @@ userController.moodResponse = (req, res, next) => {
     })
     .catch((qerr) => console.log(qerr));
   // console.log('in mood', req.body);
+=======
+    const getMoodResponseValue = [mood];
+
+    db.query(getMoodResponseString, getMoodResponseValue)
+        .then(response => {
+            //gets a random moodresponse for every currentMood in table
+            const random = Math.floor(Math.random() * Math.floor(response.rows.length));
+
+            //sends back moodResponse data
+            res.locals.moodresponse = response.rows[random].moodresponse;
+
+            return next();
+        })
+        .catch(err => {
+            return next(err);
+        });
+>>>>>>> 2c22dd4745916de5c90805a22d1887175ed9d12e
 };
 
-// retrieves all the moods from a specific user
 userController.getUserID = (req, res, next) => {
+<<<<<<< HEAD
     console.log('hitting getUSERID')
   // first get the user id from the customer table
   const getUserIDQUERY = 'SELECT __id FROM customer WHERE username=$1';
@@ -168,9 +235,32 @@ userController.getUserMoods = (req, res, next) => {
   const { user_id } = res.locals;
 
   const getUserMoods = 'SELECT mood, created_date FROM customer_moods WHERE user_id=$1';
+=======
+    // first get the user id from the customer table
+    const getUserIDQUERY = 'SELECT __id FROM customer WHERE username=$1';
+    const { username } = req.body;
+    const getUserValue = [username];
+
+    // query to get user_id for the getUserMoods middleware
+    db.query(getUserIDQUERY, getUserValue)
+        .then(response => {
+            console.log('GETUSER QUERY RESPONSE', response.rows[0]);
+            res.locals.user_id = response.rows[0].__id;
+            return next();
+        })
+        .catch(err => next(err));
+};
+
+userController.getUserMoods = (req, res, next) => {
+    // able to pull from res.locals.user_id from previous middleware
+    const { user_id } = res.locals;
+
+    const getUserMoods = 'SELECT mood, created_date FROM customer_moods WHERE user_id=$1';
+>>>>>>> 2c22dd4745916de5c90805a22d1887175ed9d12e
 
   const getUserMoodsValue = [user_id];
 
+<<<<<<< HEAD
   // use the user_id we got from previous query to get all the moods from our customer_moods table
   db.query(getUserMoods, getUserMoodsValue)
     .then((response) => {
@@ -179,6 +269,16 @@ userController.getUserMoods = (req, res, next) => {
       return next();
     })
     .catch((err) => next(err));
+=======
+    // use the user_id we got from previous query to get all the moods from our customer_moods table
+    db.query(getUserMoods, getUserMoodsValue)
+        .then(response => {
+            console.log('GET USER MOODS RESPONSE:', response.rows);
+            res.locals.userMoods = response.rows;
+            return next();
+        })
+        .catch(err => next(err));
+>>>>>>> 2c22dd4745916de5c90805a22d1887175ed9d12e
 };
 
 

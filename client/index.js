@@ -39,7 +39,6 @@ render(
         <Route path='/signup' component={CreateUser} />
         <Route path='/feeling' component ={Feeling} />
         <Route path='/calendar' component ={MoodContainer} />
-        <Route path="/*" component={() => 'NOT FOUND'} />
  
     </Router>
   </Provider>,
