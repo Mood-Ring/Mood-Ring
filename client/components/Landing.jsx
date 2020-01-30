@@ -1,17 +1,7 @@
-/***************************\
-*                           *
-*  Landing Page Body: The   *
-*  storage for the landing  *
-*  page's main content.     *
-*                           *
-\***************************/
-
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-//  import { Component } from 'react';
+
 import styled from 'styled-components';
-// import { connect } from 'react-redux';
-// import * as actions from '../actions/actions.js';
 
 //Styling for the whole body
 const MainDiv = styled.div`
@@ -42,68 +32,55 @@ const LoginButton = styled.button`
   }
 `;
 
-// const mapStateToProps = (reduxState) => {
-//   //used to bring in the pieces of state that the components on this page will use
-//   return {
-//     page: reduxState.page
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//   //used to bring in actions that will be dispatched within the components on this page.
-//   return {
-//     changePage: (index) => {
-//       dispatch(actions.changePage(index));
-//     }
-//   };
-// };
-
 class Landing extends Component {
-  // constructor(props) {
-  //   super(props);
+  constructor() {
+    super();
+    this.state = {
+      quote: '',
+    };
+  }
 
-  //   this.state = {
-  //     quote: '',
-  //     author: ''
-  //   };
-
-  //   this.goToSignUp = this.goToSignUp.bind(this);
-  // }
-
-  // componentDidMount() {
-  //   fetch('https://type.fit/api/quotes')
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       let rand = Math.floor(Math.random() * 1620);
-  //       console.log(res[rand].author);
-  //       if (res[rand].author == null) {
-  //         this.setState({
-  //           quote: res[rand].text,
-  //           author: 'Jon Gonzalez'
-  //         });
-  //       } else {
-  //         this.setState({
-  //           quote: res[rand].text,
-  //           author: res[rand].author
-  //         });
-  //       }
-  //     });
-  // }
-
-  // goToSignUp() {
-  //   this.props.changePage(3);
-  // }
+  componentDidMount() {
+    fetch('https://type.fit/api/quotes')
+      .then((res) => res.json())
+      .then((data) => {
+        const titlesArray = [
+          'Ph.D.',
+          'M.D.',
+          'J.D.',
+          'Esq.',
+          'the Third',
+          'Scholar',
+          'Attorney at Law',
+          'Duchess of Cambridge',
+          'His Majesty',
+          'The Reverend',
+          'Viscount of Hereford',
+          '7th Baron of Cromwell',
+          'Spiritual Leader',
+          'Life Coach, Inspirational Speaker',
+          'Frontend Master',
+        ]
+        const randomTitleNum = Math.floor(Math.random() * (titlesArray.length));
+        const randomNum = Math.floor(Math.random() * 1620);
+        if (data[randomNum].author === null) {
+          data = `"${data[randomNum].text}" - Jon Gonzalez, ${titlesArray[randomTitleNum]}`;
+          this.setState({
+            quote: data,
+          })
+        } else {
+          data = `"${data[randomNum].text}" --${data[randomNum].author}`;
+          this.setState({
+            quote: data,
+          })
+        }
+      })
+  };
 
   render() {
-    // //Variable for dynamic quote fetching
-    // const quoteComp = (
-    //   <Quote>
-    //     {/* "{this.state.quote}" - {this.state.author} */}
-    //   </Quote>
-    // );
     return (
-      <div onQuoteChange={this.props.onQuoteChange}>
-        <nav className="quote">{this.state.quoteRandom}</nav>
+      <div>
+        <nav className="quote">{this.state.quote}</nav>
         <Link className="button" to="/register">Start Today</Link>
       </div>
     );

@@ -1,13 +1,5 @@
-/****************************\
-*                            *
-*  Footer: Our Git     *
-*  Hub handles that display  *
-*  on the bottom of the page *
-*                            *
-\****************************/
-
 import React, { Component } from 'react';
-// import { Component } from 'react';
+
 import styled from 'styled-components';
 
 //Link styling
@@ -22,10 +14,6 @@ const Link = styled.a`
 `;
 
 class Footer extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
   render() {
     return (
       <div className="linksDiv">
