@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const userTable = require('./userModel');
 const calendarTable = require('./calendarModel');
 
-const PG_URI = 'postgres://zhfxpulu:K9N3Umc9sWTSTb1OgM15Obm_TE9WT5bs@rajje.db.elephantsql.com:5432/zhfxpulu';
+const PG_URI = process.env.PG_URI;
 
 // Create New Instance of Pool
 const pool = new Pool({
