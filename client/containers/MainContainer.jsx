@@ -9,10 +9,49 @@ import Footer from '../components/Footer.jsx';
 import * as actions from '../actions/actions.js';
 import { connect } from 'react-redux';
 
+/* currently hard-coded until we get React Router working properly for login */
 const mapStateToProps = (state) => {
   return {
     loggedIn: state.userState.loggedIn,
     currentUser: state.userState.currentUser,
+    userMoods: [
+          {
+              "date": "2020-01-29T05:00:00.000Z",
+              "mood": "anxious"
+          },
+          {
+              "date": "2020-01-29T05:00:00.000Z",
+              "mood": "anxious"
+          },
+          {
+              "date": "2020-01-29T05:00:00.000Z",
+              "mood": "sad"
+          },
+          {
+              "date": "2020-01-29T05:00:00.000Z",
+              "mood": "happy"
+          },
+          {
+              "date": "2020-01-29T05:00:00.000Z",
+              "mood": "happy"
+          },
+          {
+              "date": "2020-01-30T05:00:00.000Z",
+              "mood": "happy"
+          },
+          {
+              "date": "2020-01-30T05:00:00.000Z",
+              "mood": "happy"
+          },
+          {
+              "date": "2020-01-30T05:00:00.000Z",
+              "mood": "happy"
+          },
+          {
+              "date": "2020-01-30T05:00:00.000Z",
+              "mood": "happy"
+          }
+      ] 
   };
 };
 
@@ -49,11 +88,11 @@ class MainContainer extends Component {
   render() {
     return (
         <Router>
-            <Header onLogout={ this.onLogout } loggedIn={ this.props.loggedIn }/>
+            <Header onLogout={ this.onLogout } loggedIn={ this.props.loggedIn } />
             <Route exact path="/user/register" render={() => <Register onRegister={ this.onRegister }/> } />
             <Route exact path="/user/login" render={() => <Login onLogin={ this.onLogin }/> } />
             <Route exact path="/" render={() => <Landing onChangeQuote={this.onChangeQuote} quoteRandom={ this.props.quoteRandom }/> } />
-            <Route exact path="/user/mood" component={MoodContainer} />
+            <Route exact path="/user/mood" render={() => <MoodContainer userMoods={ this.props.userMoods }/> } />
             <Footer />
         </Router>
     )

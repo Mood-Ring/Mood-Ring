@@ -32,7 +32,7 @@ export function login(username, password) {
       password,
     }),
   };
-  return (dispatch) => fetch('/login', config)
+  return (dispatch) => fetch('/user/login', config)
     .then((res) => res.json())
     .then((data) => {
       dispatch({
@@ -52,26 +52,3 @@ export function logout() {
       });
     });
 }
-
-/* MOOD DATA */
-
-export const sendMoodData = (username, date, mood) => (dispatch) => {
-  const config = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      username,
-      date,
-      mood,
-    }),
-  };
-  fetch('/user/mood', config)
-    .then((response) => response.json())
-    .then((data) => dispatch({
-      type: types.GET_MOOD,
-      payload: data,
-    }))
-    .catch((err) => console.log(err));
-};
