@@ -14,6 +14,7 @@ const mapStateToProps = (state) => {
   return {
     loggedIn: state.userState.loggedIn,
     currentUser: state.userState.currentUser,
+    quoteRandom: state.userState.quoteRandom,
     // page: state.page,
   };
 };
@@ -25,9 +26,10 @@ const mapDispatchToProps = (dispatch) => ({
 //       dispatch(actions.changePage(index));
 //     }
 //   };
-  addUser: (username, password) => dispatch(actions.addUser(username, password)),
+  register: (username, password) => dispatch(actions.register(username, password)),
   login: (username, password) => dispatch(actions.login(username, password)),
   logout: () => dispatch(actions.logout()),
+  changeQuote: (quote) => dispatch(actions.changeQuote(quote)),
 });
 
 class MainContainer extends Component {
@@ -42,14 +44,15 @@ class MainContainer extends Component {
   
   constructor() {
     super();
-    this.onAddUser = this.onAddUser.bind(this);
+    this.onRegister = this.onRegister.bind(this);
     this.onLogin = this.onLogin.bind(this);
     this.onLogout = this.onLogout.bind(this);
+    this.onChangeQuote = this.onChangeQuote.bind(this);
   }
-  onAddUser(e) {
+  onRegister(e) {
     const username = e.target[0].value;
     const password = e.target[1].value;
-    this.props.addUser(username, password);
+    this.props.Register(username, password);
   }
   onLogin(e) {
     const username = e.target[0].value;
@@ -59,14 +62,18 @@ class MainContainer extends Component {
   onLogout(e) {
     this.props.logout();
   }
+  onChangeQuote(e) {
+    const quote = e.target.value;
+    this.props.changeQuote(quote);
+  }
 
   render() {
     return (
         <Router>
-            <Header loggedIn={ this.props.loggedIn }/>
-            <Route exact path="/user/signup" component={Register} />
-            <Route exact path="/user/login" component={Login} />
-            <Route exact path="/" component={Landing} />
+            <Header onLogout={ this.onLogout } loggedIn={ this.props.loggedIn }/>
+            <Route exact path="/user/register" render={() => <Register onRegister={ this.onRegister }/> } />
+            <Route exact path="/user/login" render={() => <Login onLogin={ this.onLogin }/> } />
+            <Route exact path="/" render={() => <Landing onChangeQuote={this.onChangeQuote} quoteRandom={ this.props.quoteRandom }/> } />
             <Route exact path="/mood" component={MoodContainer} />
             <Footer />
         </Router>

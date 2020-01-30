@@ -1,4 +1,4 @@
-import { ADD_USER, LOGIN, LOGOUT } from '../constants/actionTypes';
+import { REGISTER, LOGIN, LOGOUT, CHANGE_QUOTE } from '../constants/actionTypes';
 
 const initialState = {
   // currentUser is where we'll store the name of the current user,
@@ -12,6 +12,7 @@ const initialState = {
   // page: 'Home',
   // pages: ['Home', 'Login', 'UserFeed', 'Create'],
   loggedIn: false,
+  quoteRandom: '',
 };
 
 // const userReducers = (state = initialState, action) => {
@@ -56,7 +57,7 @@ const initialState = {
 
 const userReducers = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_USER:
+    case REGISTER:
       return {
         ...state,
         currentUser: action.payload,
@@ -77,6 +78,11 @@ const userReducers = (state = initialState, action) => {
         currentUser: '',
         loggedIn: false,
       };
+    case CHANGE_QUOTE:
+      return {
+        ...state,
+        quoteRandom: `"${action.payload.quote}" - ${action.payload.author}`,
+      }
     default: return state;
   }
 };

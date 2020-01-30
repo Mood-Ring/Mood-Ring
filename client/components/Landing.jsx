@@ -6,11 +6,12 @@
 *                           *
 \***************************/
 
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+//  import { Component } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import * as actions from '../actions/actions.js';
+// import { connect } from 'react-redux';
+// import * as actions from '../actions/actions.js';
 
 //Styling for the whole body
 const MainDiv = styled.div`
@@ -41,76 +42,72 @@ const LoginButton = styled.button`
   }
 `;
 
-const mapStateToProps = (reduxState) => {
-  //used to bring in the pieces of state that the components on this page will use
-  return {
-    page: reduxState.page
-  };
-};
+// const mapStateToProps = (reduxState) => {
+//   //used to bring in the pieces of state that the components on this page will use
+//   return {
+//     page: reduxState.page
+//   };
+// };
 
-const mapDispatchToProps = (dispatch) => {
-  //used to bring in actions that will be dispatched within the components on this page.
-  return {
-    changePage: (index) => {
-      dispatch(actions.changePage(index));
-    }
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   //used to bring in actions that will be dispatched within the components on this page.
+//   return {
+//     changePage: (index) => {
+//       dispatch(actions.changePage(index));
+//     }
+//   };
+// };
 
 class Landing extends Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      quote: '',
-      author: ''
-    };
+  //   this.state = {
+  //     quote: '',
+  //     author: ''
+  //   };
 
-    this.goToSignUp = this.goToSignUp.bind(this);
-  }
+  //   this.goToSignUp = this.goToSignUp.bind(this);
+  // }
 
-  componentDidMount() {
-    fetch('https://type.fit/api/quotes')
-      .then((res) => res.json())
-      .then((res) => {
-        let rand = Math.floor(Math.random() * 1620);
-        console.log(res[rand].author);
-        if (res[rand].author == null) {
-          this.setState({
-            quote: res[rand].text,
-            author: 'Jon Gonzalez'
-          });
-        } else {
-          this.setState({
-            quote: res[rand].text,
-            author: res[rand].author
-          });
-        }
-      });
-  }
+  // componentDidMount() {
+  //   fetch('https://type.fit/api/quotes')
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       let rand = Math.floor(Math.random() * 1620);
+  //       console.log(res[rand].author);
+  //       if (res[rand].author == null) {
+  //         this.setState({
+  //           quote: res[rand].text,
+  //           author: 'Jon Gonzalez'
+  //         });
+  //       } else {
+  //         this.setState({
+  //           quote: res[rand].text,
+  //           author: res[rand].author
+  //         });
+  //       }
+  //     });
+  // }
 
-  goToSignUp() {
-    this.props.changePage(3);
-  }
+  // goToSignUp() {
+  //   this.props.changePage(3);
+  // }
 
   render() {
-    //Variable for dynamic quote fetching
-    const quoteComp = (
-      <Quote>
-        "{this.state.quote}" - {this.state.author}
-      </Quote>
-    );
-
+    // //Variable for dynamic quote fetching
+    // const quoteComp = (
+    //   <Quote>
+    //     {/* "{this.state.quote}" - {this.state.author} */}
+    //   </Quote>
+    // );
     return (
-      <MainDiv>
-        {quoteComp}
-        <br></br>
-        <LoginButton className="start-today" onClick={this.goToSignUp}>
-          start today
-        </LoginButton>
-      </MainDiv>
+      <div onQuoteChange={this.props.onQuoteChange}>
+        <nav className="quote">{this.state.quoteRandom}</nav>
+        <Link className="button" to="/register">Start Today</Link>
+      </div>
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Landing);
+export default Landing;

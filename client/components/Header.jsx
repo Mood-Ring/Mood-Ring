@@ -51,7 +51,7 @@ class Header extends Component {
     return (
       !loggedIn ? (
         <nav className="header">
-          <Link className="button" to="/signup">Register</Link>
+          <Link className="button" to="/register">Register</Link>
           <Link className="button" to="/login">Login</Link>
         </nav>
         ) : (

@@ -22,7 +22,7 @@ import * as types from '../constants/actionTypes';
 //   type: types.ADD_USER
 // });
 
-export function addUser(username, password) {
+export function register(username, password) {
   const config = {
     method: 'POST',
     headers: {
@@ -33,11 +33,11 @@ export function addUser(username, password) {
       password,
     }),
   };
-  return (dispatch) => fetch('/signup', config)
+  return (dispatch) => fetch('/register', config)
     .then((res) => res.json())
     .then((data) => {
       dispatch({
-        type: types.ADD_USER,
+        type: types.REGISTER,
         payload: data,
       });
     });
@@ -74,6 +74,79 @@ export function logout() {
       });
     });
 }
+
+export function changeQuote (quote) {
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content Type': 'application/json',
+    },
+    body: JSON.stringify({
+      quote,
+    }),
+  };
+  return (dispatch) => fetch('https://type.fit/api/quotes', config)
+    .then((res) => res.json())
+    .then((data) => {
+      const titlesArray = [
+        'Ph.D.',
+        'M.D.',
+        'J.D.',
+        'Esq.',
+        'the Third',
+        'Scholar',
+        'Attorney at Law',
+        'Duchess of Cambridge',
+        'His Majesty',
+        'The Reverend',
+        'Viscount of Hereford',
+        '7th Baron of Cromwell',
+        'Spiritual Leader',
+        'Frontend Master'
+      ]
+      const randomTitle = Math.floor(Math.random() * (titlesArray.length));
+      const randomNum = Math.floor(Math.random() * 1620);
+      if (!data[randomNum].author) {
+        data = {
+          quote: data[randomNum].text,
+          author: `Jon Gonzalez, ${titlesArray[randomTitle]}`,
+        }
+        return data;
+      } else {
+        data = {
+          quote: data[randomNum].text,
+          author: data[randomNum].author,
+        }
+        return data;
+      }
+    })
+    .then((quoteFull) => {
+      dispatch({
+        type: types.CHANGE_QUOTE,
+        payload: quoteFull,
+      });
+    });
+}
+
+// componentDidMount() {
+  //   fetch('https://type.fit/api/quotes')
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       let rand = Math.floor(Math.random() * 1620);
+  //       console.log(res[rand].author);
+  //       if (res[rand].author == null) {
+  //         this.setState({
+  //           quote: res[rand].text,
+  //           author: 'Jon Gonzalez'
+  //         });
+  //       } else {
+  //         this.setState({
+  //           quote: res[rand].text,
+  //           author: res[rand].author
+  //         });
+  //       }
+  //     });
+  // }
 
 // export const changePage = (index) => ({
 //   //changePage will take in an index that is sent over via the payload.

@@ -32,15 +32,15 @@ const CreateForm = styled.form`
 `;
 
 //Submit button styling
-const SubmitBitton = styled.button`
-margin: auto;
-text-decoration: none;
-border-radius: 20px;
-opacity: 0.6%
-font-size: 20px;
-&:focus {
-  outline: none;
-}
+const SubmitButton = styled.button`
+  margin: auto;
+  text-decoration: none;
+  border-radius: 20px;
+  opacity: 0.6%
+  font-size: 20px;
+  &:focus {
+    outline: none;
+  }
 `;
 
 // const mapStateToProps = (reduxState) => {
@@ -79,61 +79,41 @@ class Register extends Component {
   //   this.onFormClick = this.onFormClick.bind(this);
   // }
 
-  onUserNameChange() {
-    const value = document.getElementById('username').value;
-    this.props.setUsername(value);
-  }
+  // onUserNameChange() {
+  //   const value = document.getElementById('username').value;
+  //   this.props.setUsername(value);
+  // }
 
-  onPasswordChange() {
-    const value = document.getElementById('password').value;
-    this.props.setPassword(value);
-  }
+  // onPasswordChange() {
+  //   const value = document.getElementById('password').value;
+  //   this.props.setPassword(value);
+  // }
 
-  onFormClick(e) {
-    e.preventDefault();
-    this.props.addUser();
-    const user = {
-      username: this.props.username,
-      password: this.props.password
-    };
-    fetch('/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    });
-    this.props.changePage(2);
-  }
+  // onFormClick(e) {
+  //   e.preventDefault();
+  //   this.props.addUser();
+  //   const user = {
+  //     username: this.props.username,
+  //     password: this.props.password
+  //   };
+  //   fetch('/signup', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(user)
+  //   });
+  //   this.props.changePage(2);
+  // }
   render() {
     return (
-      <MainDiv>
-        <CreateForm>
-          <div className="center-form">
-            <h1>Sign up</h1>
-            <label for="username">username: </label>
-            <input
-              id="username"
-              type="text"
-              onChange={this.onUserNameChange}
-            ></input>
-            <br></br>
-            <label for="password">password: </label>
-            <input
-              id="password"
-              type="password"
-              onChange={this.onPasswordChange}
-            ></input>
-            <br></br>
-            <br></br>
-            <SubmitBitton onClick={this.onFormClick}>
-              Create Account
-            </SubmitBitton>
-          </div>
-        </CreateForm>
-      </MainDiv>
-    );
+      <form className="register" onSubmit={ this.props.onRegister }>
+        <input type="text" placeholder="Username"></input>
+        <input type="password" placeholder="Password"></input>
+        <button>Register</button>
+      </form>
+    )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default Register;
