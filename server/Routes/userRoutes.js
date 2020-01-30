@@ -9,7 +9,7 @@ const moodController = require('../Controllers/moodController');
 router.post('/register', userController.createUser, (req, res) => res.status(200).json({ username: res.locals.username }));
 
 // funcionality for logging in without oauth
-router.post('/login', userController.login, (req, res) => res.status(200).json({ username: res.locals.username }));
+router.post('/login', userController.login, moodController.sendUserMoods, (req, res) => res.status(200).json({ username: res.locals.username, userMoods: res.locals.userMoods }));
 
 // router.get('/logout', (req, res) => {
 

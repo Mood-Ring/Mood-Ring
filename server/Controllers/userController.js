@@ -39,6 +39,7 @@ userController.createUser = (req, res, next) => {
 };
 
 userController.login = (req, res, next) => {
+  console.log('in login function')
   const queryString = 'SELECT * FROM users WHERE username= $1';
   const values = [req.body.username];
   // db.query to verify user in User table
